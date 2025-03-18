@@ -1,0 +1,41 @@
+body, :root {
+  background: var(--contrast);
+  font-size: 62.5%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.white-text {
+  p, h1, h2, h3, h4, h5, h6 {
+    color: var(--contrast);
+  }
+
+  p, a {
+    font-size: 1.6rem;
+  }
+
+  a {
+    color: var(--contrast);
+  }
+
+}
+
+header#header {
+  background: var(--theme);
+  width: 100%;
+  height: 10rem;
+  padding: 0.5rem 1.5rem;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo-title {
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
+}
