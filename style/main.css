@@ -2,6 +2,7 @@
   background: var(--contrast);
   font-size: 62.5%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  white-space: nowrap;
 }
 
 body {
@@ -33,15 +34,35 @@ header#header {
   position: relative;
   top: 0;
   left: 0;
+  box-sizing: border-box;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
+  > * {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  > :nth-child(odd) {
+    width: 30%;
+  }
+
+  > :nth-child(even) {
+    justify-content: center;
+    width: 40%;
+  }
+
   .logo-title {
     h1 {
       font-size: 2.5rem;
     }
+  }
+
+  .user-profile {
+    justify-content: flex-end;
   }
 }
 
@@ -51,12 +72,7 @@ main#service-body {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-
-  .search-area {
-    background: var(--theme-light);
-    padding: 4rem;
-    border-radius: 0 0 3rem 3rem;
-  }
+  position: relative;
 
   .current-meals {
     display: flex;
@@ -65,25 +81,67 @@ main#service-body {
     justify-content: center;
     align-items: center;
   }
+  .map-container {
+    position: relative;
+
+      .search {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 2rem;
+      }
+  }
+
 
 }
 
-input[type="text"], button {
-  padding: 0.5rem;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  border-radius: 0.7rem;
+.input-container {
+  background: var(--contrast);
+  padding: 1rem;
+  border-radius: 3rem;
+  display: flex;
+  align-items: center;
   border: 0.2rem solid var(--theme);
   box-shadow: 0 0.2rem 0.4rem var(--shadow);
 }
 
+input[type="text"] {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: var(--theme);
+
+  &:focus {
+    outline: none;
+  }
+}
+
 button {
-  transition: 0.15s ease-out;
+  transition: box-shadow 0.15s ease-out;
   background: var(--theme);
   color: var(--contrast);
   cursor: pointer;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  font-size: 2rem;
+  border-radius: 0.7rem;
 
-  &:hover {
+  &.no-bg {
+    background: none;
+    border-radius: 0;
+    color: var(--theme);
+    border: none;
+    border-left: 0.2rem solid rgba(0, 0, 0, 0);
+    border-right: 0.2rem solid  rgba(0, 0, 0, 0);
+  }
+
+  &.no-bg:hover {
+    color: var(--shadow);
+    border-left: 0.2rem solid var(--theme);
+    border-right: 0.2rem solid var(--theme);
+  }
+
+  &:hover:not(.no-bg) {
     background: var(--theme-dark);
     box-shadow: 0 0rem 0.8rem var(--shadow);
   }

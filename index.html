@@ -7,6 +7,7 @@
   <title>Student Restaurant Service</title>
   <link rel="stylesheet" href="style/variables.css">
   <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="style/daily-meals.css">
 </head>
 
 <body>
@@ -14,18 +15,22 @@
     <div class="logo-title">
       <h1>Student Restaurant Service</h1>
     </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+    <div class="current-restaurant">
+      <h3>Sodexo Myllypuro</h3>
+    </div>
+    <nav class="user-profile">
+      <a href="login.html">Log in</a>
+      <span>|</span>
+      <a href="signup.html">Sign up</a>
     </nav>
-    <div class="user-profile"></div>
   </header>
   <main id="service-body">
-    <div class="search-area">
-      <input type="text" placeholder="Search for a restaurant">
-      <button>Search</button>
+    <div class="map-container">
+      <div class="input-container search">
+        <input type="text" placeholder="Search for a restaurant">
+        <button class="no-bg">Search</button>
+      </div>
+      <img src="image/placeholder-map.png" alt="" class="map">
     </div>
     <div class="service-list">
       <nav>
@@ -38,25 +43,23 @@
         <button>Sun</button>
         <button>Whole week</button>
       </nav>
-      <table class="current-meals dark-text">
-        <!-- Generate table with multiple meals for the current day (monday) -->
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-        </tr>
-        <tr>
-          <td>Spaghetti</td>
-          <td>5.00</td>
-        </tr>
-        <tr>
-          <td>Lasagna</td>
-          <td>6.00</td>
-        </tr>
-        <tr>
-          <td>Salad</td>
-          <td>3.00</td>
-        </tr>
-      </table>
+      <div class="current-meals dark-text">
+        <div class="meal-display">
+          <div class="name">Chilillä ja suklaalla maustettua kasvispataa luomumustapavuista ja basmatiriisiä</div>
+          <div class="price">2,95€/5,90€/8,50€</div>
+          <div class="info">G M</div>
+        </div>
+        <div class="meal-display">
+          <div class="name">Juustoisia parsakaalipihvejä 2 kpl/annos, persilja-kermaviiliä ja perunaa</div>
+          <div class="price">2,95€/5,90€/8,50€</div>
+          <div class="info">G L</div>
+        </div>
+        <div class="meal-display">
+          <div class="name">Makkarakastiketta ja perunamuusia</div>
+          <div class="price">2,95€/5,90€/8,50€</div>
+          <div class="info">L</div>
+        </div>
+      </div>
     </div>
   </main>
 </body>

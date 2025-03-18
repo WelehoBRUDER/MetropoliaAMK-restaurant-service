@@ -1,0 +1,39 @@
+.current-meals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2rem;
+
+  .meal-display {
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+    min-height: 4rem;
+    width: 100%;
+    align-items: center;
+    border: 0.2rem solid var(--theme);
+
+    .name {
+      width: 60%;
+      white-space: wrap;
+    }
+
+    .price {
+      width: 20%;
+    }
+
+    .info {
+      width: 20%;
+    }
+  }
+}
+.service-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
