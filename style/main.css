@@ -1,20 +1,25 @@
-body, :root {
+:root {
   background: var(--contrast);
   font-size: 62.5%;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.white-text {
-  p, h1, h2, h3, h4, h5, h6 {
-    color: var(--contrast);
-  }
+body {
+  margin: 0;
+  padding: 0;
+}
 
-  p, a {
+.dark-text {
+  * {
+    color: var(--theme);
     font-size: 1.6rem;
   }
+}
 
-  a {
+.white-text {
+  * {
     color: var(--contrast);
+    font-size: 1.6rem;
   }
 
 }
@@ -25,7 +30,7 @@ header#header {
   height: 10rem;
   padding: 0.5rem 1.5rem;
   margin: 0;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
 
@@ -37,5 +42,54 @@ header#header {
     h1 {
       font-size: 2.5rem;
     }
+  }
+}
+
+main#service-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  .search-area {
+    background: var(--theme-light);
+    padding: 4rem;
+    border-radius: 0 0 3rem 3rem;
+  }
+
+  .current-meals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+}
+
+input[type="text"], button {
+  padding: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 0.7rem;
+  border: 0.2rem solid var(--theme);
+  box-shadow: 0 0.2rem 0.4rem var(--shadow);
+}
+
+button {
+  transition: 0.15s ease-out;
+  background: var(--theme);
+  color: var(--contrast);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--theme-dark);
+    box-shadow: 0 0rem 0.8rem var(--shadow);
+  }
+
+  &.selected {
+    background: var(--contrast);
+    color: var(--theme);
   }
 }

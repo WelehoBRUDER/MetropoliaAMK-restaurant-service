@@ -1,6 +1,8 @@
 :root {
   --theme: #0B3C49;
+  --theme-dark: #071f23;
   --theme-light: #9EA3B0;
   --contrast: #FAE1DF;
   --bright: #AB4E68;
+  --shadow: #2B2D42;
 }
