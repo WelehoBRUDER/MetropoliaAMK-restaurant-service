@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Restaurant Service</title>
+  <link rel="stylesheet" href="style/variables.css">
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="style/daily-meals.css">
+</head>
+
+<body>
+  <header id="header" class="white-text">
+    <div class="logo-title">
+      <h1><a href="index.html">Student Restaurant Service</a></h1>
+    </div>
+    <div class="current-restaurant">
+      <h3>Sodexo Myllypuro</h3>
+    </div>
+    <nav class="user-profile">
+      <a href="login.html">Log in</a>
+      <span>|</span>
+      <a href="signup.html">Sign up</a>
+    </nav>
+  </header>
+  <main id="service-body">
+    <section id="signup">
+      <h2>Sign up</h2>
+      <form action="signup.php" method="post">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <label for="password-confirmation">Confirm password</label>
+        <input type="password" name="password-confirmation" id="password-confirmation" required>
+        <button type="submit">Sign up</button>
+      </form>
+    </section>
+  </main>
+</body>
+
+</html>

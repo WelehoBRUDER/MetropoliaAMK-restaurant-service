@@ -56,8 +56,8 @@ header#header {
   }
 
   .logo-title {
-    h1 {
-      font-size: 2.5rem;
+    h1 > a {
+      font-size: 2.2rem;
     }
   }
 
@@ -150,4 +150,11 @@ button {
     background: var(--contrast);
     color: var(--theme);
   }
+}
+
+form {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-direction: column;
 }
