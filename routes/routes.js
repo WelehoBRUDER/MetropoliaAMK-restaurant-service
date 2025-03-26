@@ -1,4 +1,5 @@
 import {baseUrl} from "./variables.js";
+import {local} from "../script/local.js";
 
 const fetchData = async (url, options) => {
   try {
@@ -29,7 +30,7 @@ const getAllRestaurants = async () => {
 
 const getDailyMeals = async (restaurantId) => {
   const menu = await fetchData(
-    `${baseUrl}/restaurants/daily/${selectedRestaurant}/fi`
+    `${baseUrl}/restaurants/daily/${restaurantId}/${local.lang}`
   );
   if (menu) {
     return menu;
@@ -40,7 +41,7 @@ const getDailyMeals = async (restaurantId) => {
 
 const getWeeklyMeals = async (restaurantId) => {
   const menu = await fetchData(
-    `${baseUrl}/restaurants/weekly/${selectedRestaurant}/fi`
+    `${baseUrl}/restaurants/weekly/${restaurantId}/${local.lang}`
   );
   if (menu) {
     return menu;

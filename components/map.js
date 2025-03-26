@@ -7,9 +7,19 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-const addMarker = (lat, lon, name) => {
+/**
+ * Adds a marker to the leaflet map
+ * @param {*} lat - latitude
+ * @param {*} lon - longitude
+ * @param {*} name - popup name
+ * @param {*} callback - function to call when marker is clicked
+ */
+const addMarker = (lat, lon, name, callback) => {
   const marker = L.marker([lat, lon]).addTo(map);
   marker.bindPopup(name);
+  marker.on("click", () => {
+    callback();
+  });
 };
 
 const updatePosition = () => {

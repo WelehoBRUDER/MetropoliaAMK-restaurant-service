@@ -16,16 +16,16 @@
     border: 0.2rem solid var(--theme);
 
     .name {
-      width: 60%;
       white-space: wrap;
     }
 
     .price {
-      width: 20%;
+      white-space: wrap;
+      font-style: italic;
     }
 
     .info {
-      width: 20%;
+      font-weight: bold;
     }
   }
 }
