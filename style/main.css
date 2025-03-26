@@ -81,7 +81,8 @@ main#service-body {
     justify-content: center;
     align-items: center;
   }
-  .map-container {
+
+  #map {
     position: relative;
 
       .search {
@@ -89,6 +90,26 @@ main#service-body {
         left: 0;
         top: 0;
         margin: 2rem;
+        z-index: 1000;
+      }
+
+      .search-results {
+        position: absolute;
+        left: 1rem;
+        top: 4.5rem;
+        margin: 2rem;
+        padding: 1rem;
+        border-radius: 0rem 0rem 3rem 3rem;
+        z-index: 900;
+        border: 0.2rem solid var(--contrast);
+        box-shadow: 0 0.2rem 0.4rem var(--shadow);
+        background: var(--theme);
+        width: 30rem;
+
+        li {
+          font-size: 2rem;
+          color: var(--contrast);
+        }
       }
   }
 

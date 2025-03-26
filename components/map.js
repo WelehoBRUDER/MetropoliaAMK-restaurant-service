@@ -1,7 +1,7 @@
 import {getGeoLocation} from "../lib/geo.js";
 import {updateSession} from "../script/session.js";
 
-const map = L.map("map").setView([60.175, 24.95], 13);
+const map = L.map("map", {zoomControl: false}).setView([60.175, 24.95], 13);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -12,7 +12,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
  * @param {*} lat - latitude
  * @param {*} lon - longitude
  * @param {*} name - popup name
- * @param {*} callback - function to call when marker is clicked
+ * @param {*} callback -
  */
 const addMarker = (lat, lon, name, callback) => {
   const marker = L.marker([lat, lon]).addTo(map);
@@ -22,8 +22,8 @@ const addMarker = (lat, lon, name, callback) => {
   });
 };
 
-const updatePosition = () => {
-  const pos = getGeoLocation();
+const updatePosition = (loc) => {
+  const pos = loc ? loc : getGeoLocation();
   map.setView(pos, 13);
   updateSession("pos", pos);
 };
