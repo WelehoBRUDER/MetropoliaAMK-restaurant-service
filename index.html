@@ -5,9 +5,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Restaurant Service</title>
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="style/leaflet.css" />
+  <script src="lib/leaflet.js"></script>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style/variables.css">
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/daily-meals.css">
+
+  <!-- Import modules -->
+  <script src="lib/geo.js" type="module" defer></script>
+  <script src="routes/variables.js" type="module" defer></script>
+  <script src="routes/routes.js" type="module" defer></script>
+  <script src="components/map.js" type="module" defer></script>
+  <script src="script/session.js" type="module" defer></script>
+  <script src="script/main.js" type="module" defer></script>
 </head>
 
 <body>
@@ -25,12 +38,12 @@
     </nav>
   </header>
   <main id="service-body">
-    <div class="map-container">
+    <div id="map">
       <div class="input-container search">
         <input type="text" placeholder="Search for a restaurant">
         <button class="no-bg">Search</button>
       </div>
-      <img src="image/placeholder-map.png" alt="" class="map">
+    </div>
     </div>
     <div class="service-list">
       <nav>

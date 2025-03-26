@@ -158,3 +158,8 @@ form {
   justify-content: center;
   flex-direction: column;
 }
+
+#map {
+  width: 80rem;
+  height: 50rem;
+}
