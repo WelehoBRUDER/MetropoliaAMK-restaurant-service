@@ -77,8 +77,8 @@ const login = async (req, res) => {
     });
     res.status(200).send({user: user._id});
   } catch (err) {
-    console.error(err);
-    res.status(400).send(err.message);
+    console.log("FAILED TO LOG IN !!!!!", err);
+    res.status(400).json({message: err});
   }
 };
 

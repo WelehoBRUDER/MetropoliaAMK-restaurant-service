@@ -1,4 +1,4 @@
-import {baseUrl} from "./variables.js";
+import {baseUrl, backendUrl} from "./variables.js";
 import {local} from "../script/local.js";
 
 const fetchData = async (url, options) => {
@@ -12,10 +12,11 @@ const fetchData = async (url, options) => {
         console.error("Failed to get response data: " + error);
       }
     } else {
-      throw new Error(res.status);
+      const errorMessage = await res.json();
+      throw new Error(errorMessage.message, res.status);
     }
   } catch (error) {
-    console.error("Connection failed: " + error);
+    console.warn(error);
   }
 };
 
@@ -50,4 +51,19 @@ const getWeeklyMeals = async (restaurantId) => {
   }
 };
 
-export {getAllRestaurants, getDailyMeals, getWeeklyMeals};
+const postLogin = async (username, password) => {
+  try {
+    const data = await fetchData(`${backendUrl}users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({username, password}),
+    });
+    if (data) {
+      return data;
+    }
+  } catch (error) {}
+};
+
+export {getAllRestaurants, getDailyMeals, getWeeklyMeals, postLogin};

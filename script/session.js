@@ -2,6 +2,7 @@ const defaultSession = {
   restaurants: [],
   selected: "",
   pos: [],
+  user: {},
 };
 
 const session = {
@@ -29,4 +30,9 @@ const loadSession = () => {
   }
 };
 
-export {updateSession, loadSession, session};
+const clearSession = () => {
+  session.current = defaultSession;
+  sessionStorage.removeItem("student-restaurant-session");
+};
+
+export {updateSession, loadSession, clearSession, session};
