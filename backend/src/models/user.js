@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const {isEmail} = require("validator");
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import isEmail from "validator/lib/isEmail.js";
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     validate: [isEmail, "Please enter a valid email"],
   },
-  fullname: "",
+  fullname: String,
   profile_picture: String,
   date_registered: Date,
 });
@@ -49,4 +49,5 @@ UserSchema.statics.login = async function (username, password) {
   throw Error("No user with this email address");
 };
 
-module.exports = mongoose.model("User", UserSchema, "users");
+const User = mongoose.model("User", UserSchema, "users");
+export default User;

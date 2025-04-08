@@ -8,7 +8,7 @@ const url = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB
 
 const PORT = process.env.PORT || 5000;
 
-app.route("/api/users", userRouter);
+app.use("/api/users", userRouter);
 
 /* Connect to database */
 mongoose
@@ -20,5 +20,7 @@ mongoose
     console.error(err);
   })
   .then(() => {
-    app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+    app.listen(PORT, () =>
+      console.log(`Server is listening on port http://localhost:${PORT}`)
+    );
   });
