@@ -1,12 +1,18 @@
 import {baseUrl, backendUrl} from "./variables.js";
 import {local} from "../script/local.js";
 
-const fetchData = async (url, options) => {
+const fetchData = async (url, options, getToken) => {
   try {
     const res = await fetch(url, options);
     if (res.ok) {
       try {
         const data = await res.json();
+        if (getToken) {
+          console.log(res.body);
+          console.log(res.headers);
+          console.log(res);
+          data.token = res.cookie;
+        }
         return data;
       } catch (error) {
         console.error("Failed to get response data: " + error);
@@ -16,7 +22,7 @@ const fetchData = async (url, options) => {
       throw new Error(errorMessage.message, res.status);
     }
   } catch (error) {
-    console.warn(error);
+    return {error: error.message, status: "fail"};
   }
 };
 
@@ -53,17 +59,23 @@ const getWeeklyMeals = async (restaurantId) => {
 
 const postLogin = async (username, password) => {
   try {
-    const data = await fetchData(`${backendUrl}users/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const data = await fetchData(
+      `${backendUrl}users/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({username, password}),
       },
-      body: JSON.stringify({username, password}),
-    });
+      true
+    );
     if (data) {
       return data;
     }
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 };
 
 export {getAllRestaurants, getDailyMeals, getWeeklyMeals, postLogin};

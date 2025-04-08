@@ -185,3 +185,11 @@ form {
   height: 60rem;
   max-width: 120rem;
 }
+
+.error-message {
+  color: var(--error);
+  font-size: 1.6rem;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
