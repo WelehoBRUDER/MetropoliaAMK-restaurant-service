@@ -20,6 +20,28 @@ const fetchData = async (url, options) => {
   }
 };
 
+const fetchImageData = async (url, options) => {
+  try {
+    const res = await fetch(url, options);
+    if (res.ok) {
+      try {
+        const data = await res.blob();
+        console.log(data);
+        const imageUrl = URL.createObjectURL(data);
+        console.log(imageUrl);
+        return imageUrl;
+      } catch (error) {
+        console.error("Failed to get response data: " + error);
+      }
+    } else {
+      const errorMessage = await res.json();
+      throw new Error(errorMessage.message, res.status);
+    }
+  } catch (error) {
+    return {error: error.message, status: "fail"};
+  }
+};
+
 const getAllRestaurants = async () => {
   const data = await fetchData(`${baseUrl}/restaurants`);
   if (data) {
@@ -105,11 +127,30 @@ const getUserByName = async (username) => {
   }
 };
 
+const getDefaultProfilePicture = async () => {
+  const response = await fetchImageData(`${backendUrl}public/default.png`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  try {
+    if (response?.profile_picture !== undefined) {
+      return response.profile_picture;
+    } else {
+      throw new Error(response);
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
 export {
   getAllRestaurants,
   getDailyMeals,
   getWeeklyMeals,
   getMeByToken,
   getUserByName,
+  getDefaultProfilePicture,
   postLogin,
 };

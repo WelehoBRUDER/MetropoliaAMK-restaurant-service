@@ -1,5 +1,10 @@
+import {getDefaultProfilePicture} from "../routes/routes.js";
+
 const userProfile = (user, options) => {
   const section = document.querySelector("#profile");
+  getDefaultProfilePicture().then((data) => {
+    console.log(data);
+  });
   section.innerHTML = `
     <h2>${user.fullname}</h2>
     <p>Username: ${user.username}</p>
