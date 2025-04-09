@@ -9,7 +9,10 @@ loginForm.addEventListener("submit", async (e) => {
   if (data.status === "fail") {
     loginError.innerText = data.error;
   } else {
-    console.log(data.cookie);
+    if (data.token) {
+      localStorage.setItem("service-token", data.token);
+    }
+    window.location.href = "/";
   }
 });
 const loginError = document.querySelector("#login-error");

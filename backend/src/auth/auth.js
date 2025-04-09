@@ -1,7 +1,9 @@
 import jwt from "jsonwebtoken";
 
 const requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
+  console.log(res.headers);
+  const token = res.headers.get("Authorization");
+  console.log("token", token);
   if (!token) {
     return res.send("");
   }

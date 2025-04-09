@@ -75,7 +75,7 @@ const login = async (req, res) => {
       httpOnly: true,
       maxAge: maxAge * 1000,
     });
-    res.status(200).send({user: user._id});
+    res.status(200).send({user: user._id, token: token});
   } catch (err) {
     res.status(400).json({message: err.message});
   }
@@ -88,6 +88,7 @@ const logOut = async (req, res) => {
 
 const authorize = async (req, res) => {
   const token = req.cookies.jwt;
+  console.log("tfgf", token);
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   const user = await User.findById(decoded.id);
   await res.status(200).send({user: user, auth: true});

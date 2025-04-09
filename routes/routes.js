@@ -1,18 +1,12 @@
 import {baseUrl, backendUrl} from "./variables.js";
 import {local} from "../script/local.js";
 
-const fetchData = async (url, options, getToken) => {
+const fetchData = async (url, options) => {
   try {
     const res = await fetch(url, options);
     if (res.ok) {
       try {
         const data = await res.json();
-        if (getToken) {
-          console.log(res.body);
-          console.log(res.headers);
-          console.log(res);
-          data.token = res.cookie;
-        }
         return data;
       } catch (error) {
         console.error("Failed to get response data: " + error);
@@ -59,17 +53,13 @@ const getWeeklyMeals = async (restaurantId) => {
 
 const postLogin = async (username, password) => {
   try {
-    const data = await fetchData(
-      `${backendUrl}users/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({username, password}),
+    const data = await fetchData(`${backendUrl}users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      true
-    );
+      body: JSON.stringify({username, password}),
+    });
     if (data) {
       return data;
     }
@@ -78,4 +68,30 @@ const postLogin = async (username, password) => {
   }
 };
 
-export {getAllRestaurants, getDailyMeals, getWeeklyMeals, postLogin};
+const getMeByToken = async (token) => {
+  const response = await fetchData(`${backendUrl}users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  try {
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error(response);
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
+export {
+  getAllRestaurants,
+  getDailyMeals,
+  getWeeklyMeals,
+  getMeByToken,
+  postLogin,
+};

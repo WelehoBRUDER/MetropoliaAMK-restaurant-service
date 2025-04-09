@@ -11,7 +11,7 @@ import requireAuth from "../auth/auth.js";
 
 const userRouter = express.Router();
 
-userRouter.get("/:username", findUserByName);
+userRouter.get("/one/:username", findUserByName);
 
 userRouter.post("/create", createUser);
 
@@ -21,6 +21,6 @@ userRouter.post("/login", login);
 
 userRouter.get("/logout", logOut);
 
-userRouter.get("/authorize", requireAuth, authorize);
+userRouter.get("/me", requireAuth, authorize);
 
 export default userRouter;
