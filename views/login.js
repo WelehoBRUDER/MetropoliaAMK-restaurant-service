@@ -1,4 +1,4 @@
-import {login} from "../script/user.js";
+import {login, hasToken} from "../script/user.js";
 
 const loginForm = document.querySelector("#login-form");
 loginForm.addEventListener("submit", async (e) => {
@@ -16,3 +16,8 @@ loginForm.addEventListener("submit", async (e) => {
   }
 });
 const loginError = document.querySelector("#login-error");
+
+// Boot the user out if they are already logged in
+if (hasToken()) {
+  window.location.href = "/";
+}

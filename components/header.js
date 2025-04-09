@@ -10,7 +10,7 @@ const createHeader = async () => {
       <h3>Sodexo Myllypuro</h3>
     </div>`;
   const user = await getUserData();
-  if (user?._id) {
+  if (user) {
     header.innerHTML += `
     <nav class="user-profile">
       <a href="profile.html">${user.fullname}</a>
