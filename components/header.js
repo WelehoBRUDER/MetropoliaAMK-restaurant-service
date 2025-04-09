@@ -13,7 +13,7 @@ const createHeader = async () => {
   if (user) {
     header.innerHTML += `
     <nav class="user-profile">
-      <a href="profile.html">${user.fullname}</a>
+      <a href="profile.html?id=${user.username}">${user.fullname}</a>
     </nav>
     `;
   } else {

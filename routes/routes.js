@@ -87,10 +87,29 @@ const getMeByToken = async (token) => {
   }
 };
 
+const getUserByName = async (username) => {
+  const response = await fetchData(`${backendUrl}users/one/${username}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  try {
+    if (response?.user !== undefined) {
+      return response.user;
+    } else {
+      throw new Error(response);
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
 export {
   getAllRestaurants,
   getDailyMeals,
   getWeeklyMeals,
   getMeByToken,
+  getUserByName,
   postLogin,
 };
