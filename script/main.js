@@ -2,7 +2,6 @@ import {getAllRestaurants, getDailyMeals} from "../routes/routes.js";
 import {session, loadSession, updateSession} from "./session.js";
 import {addMarker, updatePosition} from "../components/map.js";
 import {createMealDisplay} from "../components/meals.js";
-import {getMe} from "./user.js";
 
 const search = document.querySelector("#map .search input");
 const searchResults = document.querySelector("#map .search-results");
@@ -68,6 +67,5 @@ const main = async () => {
     updateSession("restaurants", await getAllRestaurants());
   }
   createRestaurantPopups(session.current.restaurants);
-  getMe().then((res) => console.log(res));
 };
 main();

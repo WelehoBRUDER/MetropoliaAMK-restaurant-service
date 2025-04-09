@@ -1,19 +1,16 @@
 import jwt from "jsonwebtoken";
 
 const requireAuth = (req, res, next) => {
-  console.log(res.headers);
-  const token = res.headers.get("Authorization");
-  console.log("token", token);
-  if (!token) {
-    return res.send("");
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token == null) {
+    return res.sendStatus(401);
   }
-
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded.user;
+    res.locals.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch (err) {
-    return res.send(err);
+    res.status(403).send({message: "Invalid token"});
   }
 };
 

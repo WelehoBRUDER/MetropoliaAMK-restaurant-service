@@ -77,9 +77,8 @@ const getMeByToken = async (token) => {
     },
   });
   try {
-    if (response.ok) {
-      const data = await response.json();
-      return data;
+    if (response?.user !== undefined) {
+      return response.user;
     } else {
       throw new Error(response);
     }

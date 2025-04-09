@@ -87,11 +87,13 @@ const logOut = async (req, res) => {
 };
 
 const authorize = async (req, res) => {
-  const token = req.cookies.jwt;
-  console.log("tfgf", token);
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  const user = await User.findById(decoded.id);
-  await res.status(200).send({user: user, auth: true});
+  console.log(res.locals.user);
+  if (res.locals.user?.id) {
+    const user = await User.findById(res.locals.user.id);
+    await res.status(200).send({user: user});
+  } else {
+    res.status(401).send({message: "Unauthorized"});
+  }
 };
 
 const findUserByName = async (req, res) => {

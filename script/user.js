@@ -1,5 +1,4 @@
 import {postLogin, getMeByToken} from "../routes/routes.js";
-import {backendUrl} from "../routes/variables.js";
 
 const login = async (username, password) => {
   try {
@@ -14,7 +13,15 @@ const getMe = async () => {
   const token = localStorage.getItem("service-token");
   if (!token) return null;
   const data = await getMeByToken(token);
-  console.log(data);
+  if (data) {
+    return data;
+  } else return null;
 };
 
-export {login, getMe};
+const hasToken = () => {
+  const token = localStorage.getItem("service-token");
+  if (token) return true;
+  return false;
+};
+
+export {login, getMe, hasToken};
