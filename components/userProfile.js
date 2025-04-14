@@ -13,7 +13,9 @@ const userProfile = (user, options) => {
       "fi-FI"
     )}</p>
     ${
-      options?.editable ? `<button id="edit-profile">Edit profile</button>` : ""
+      options?.editable
+        ? `<button id="edit-profile" onclick="window.location.href='${window.location.href}&edit=true'">Edit profile</button>`
+        : ""
     }
   `;
 };

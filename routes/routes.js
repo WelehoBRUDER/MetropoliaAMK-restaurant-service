@@ -145,6 +145,18 @@ const getDefaultProfilePicture = async () => {
   }
 };
 
+const putUser = async (user, userData) => {
+  const response = await fetchData(`${backendUrl}users/edit/${user.username}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user.token}`,
+    },
+    body: JSON.stringify(userData),
+  });
+  return response;
+};
+
 export {
   getAllRestaurants,
   getDailyMeals,
@@ -153,4 +165,5 @@ export {
   getUserByName,
   getDefaultProfilePicture,
   postLogin,
+  putUser,
 };

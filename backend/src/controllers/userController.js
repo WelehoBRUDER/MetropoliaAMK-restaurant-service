@@ -52,13 +52,14 @@ const createUser = async (req, res) => {
 
 const editUser = async (req, res) => {
   const {username} = req.params;
-  let {fullname, profile_picture} = req.body;
+  let {fullname, email, password} = req.body;
   try {
     const user = await User.findOne({username: username});
 
     await user.updateOne({
       fullname: fullname ?? user.fullname,
-      profile_picture: profile_picture ?? user.profile_picture,
+      email: email ?? user.email,
+      password: password ?? user.password,
     });
     res.status(201).send({user: user._id});
   } catch (err) {

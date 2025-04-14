@@ -14,7 +14,7 @@ const getMe = async () => {
   if (!token) return null;
   const data = await getMeByToken(token);
   if (data) {
-    return data;
+    return {...data, token};
   } else return null;
 };
 

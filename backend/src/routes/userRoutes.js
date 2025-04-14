@@ -15,7 +15,7 @@ userRouter.get("/one/:username", findUserByName);
 
 userRouter.post("/create", createUser);
 
-userRouter.put("/edit/:username", editUser);
+userRouter.put("/edit/:username", requireAuth, editUser);
 
 userRouter.post("/login", login);
 
