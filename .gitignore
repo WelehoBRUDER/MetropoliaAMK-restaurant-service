@@ -150,4 +150,4 @@ dist
 # ignore content of uploads folder
 backend/uploads/*
 # except one file to have the folder in version control
-backend/!uploads/default.png
+!backend/uploads/default.png
