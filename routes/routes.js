@@ -26,12 +26,10 @@ const fetchImageData = async (url, options) => {
     if (res.ok) {
       try {
         const data = await res.blob();
-        console.log(data);
         const imageUrl = URL.createObjectURL(data);
-        console.log(imageUrl);
         return imageUrl;
       } catch (error) {
-        console.error("Failed to get response data: " + error);
+        console.error("Failed to get response data: " + error.message);
       }
     } else {
       const errorMessage = await res.json();
@@ -127,21 +125,15 @@ const getUserByName = async (username) => {
   }
 };
 
-const getDefaultProfilePicture = async () => {
-  const response = await fetchImageData(`${backendUrl}public/default.png`, {
+const getProfilePicture = async (id) => {
+  const response = await fetchImageData(`${backendUrl}public/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  try {
-    if (response?.profile_picture !== undefined) {
-      return response.profile_picture;
-    } else {
-      throw new Error(response);
-    }
-  } catch (error) {
-    return error;
+  if (response) {
+    return response;
   }
 };
 
@@ -163,7 +155,7 @@ export {
   getWeeklyMeals,
   getMeByToken,
   getUserByName,
-  getDefaultProfilePicture,
+  getProfilePicture,
   postLogin,
   putUser,
 };

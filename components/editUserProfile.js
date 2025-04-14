@@ -1,11 +1,8 @@
-import {getDefaultProfilePicture} from "../routes/routes.js";
 import {putUser} from "../routes/routes.js";
 
 const editUserProfile = (user) => {
   const section = document.querySelector("#profile");
-  getDefaultProfilePicture().then((data) => {
-    console.log(data);
-  });
+
   section.innerHTML = `
       <form method="post" id="edit-form">
         <p id="edit-error" class="error-message"></p>
