@@ -1,4 +1,4 @@
-import {putUser} from "../routes/routes.js";
+import {putUser, postProfilePicture} from "../routes/routes.js";
 
 const editUserProfile = (user) => {
   const section = document.querySelector("#profile");
@@ -6,6 +6,8 @@ const editUserProfile = (user) => {
   section.innerHTML = `
       <form method="post" id="edit-form">
         <p id="edit-error" class="error-message"></p>
+        <label for="picture">Profile picture</label>
+        <input type="file" class="normal-input" name="picture" id="picture" accept="image/*">
         <label for="fullname">Display name</label>
         <input type="text" value="${user.fullname}" class="normal-input" name="fullname" id="fullname">
         <label for="email">Email</label>
@@ -19,14 +21,24 @@ const editUserProfile = (user) => {
   const editForm = document.querySelector("#edit-form");
   editForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const data = new FormData(editForm);
+    const picture = data.get("picture");
+
+    if (picture) {
+      try {
+        const updatedPicture = await postProfilePicture(user, picture);
+        if (updatedPicture.user) {
+          console.log("Success!");
+        }
+      } catch (error) {
+        document.querySelector("#edit-error").innerText = error.message;
+      }
+    }
+
     try {
-      const fullname = editForm.fullname.value;
-      const email = editForm.email.value;
-      const password = editForm.password.value || null;
-      const response = await putUser(user, {fullname, email, password});
-      console.log(response);
+      const response = await putUser(user, data);
       if (response.user) {
-        window.location.href = `/profile.html?id=${user.username}`;
+        // window.location.href = `/profile.html?id=${user.username}`;
       } else {
         document.querySelector("#edit-error").innerText = response.error;
       }

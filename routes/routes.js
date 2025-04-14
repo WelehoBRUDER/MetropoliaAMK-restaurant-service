@@ -27,6 +27,7 @@ const fetchImageData = async (url, options) => {
       try {
         const data = await res.blob();
         const imageUrl = URL.createObjectURL(data);
+        console.log(imageUrl);
         return imageUrl;
       } catch (error) {
         console.error("Failed to get response data: " + error.message);
@@ -126,7 +127,7 @@ const getUserByName = async (username) => {
 };
 
 const getProfilePicture = async (id) => {
-  const response = await fetchImageData(`${backendUrl}public/${id}`, {
+  const response = await fetchImageData(`${backendUrl}uploads/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -135,6 +136,22 @@ const getProfilePicture = async (id) => {
   if (response) {
     return response;
   }
+};
+
+const postProfilePicture = async (user, picture) => {
+  const formData = new FormData();
+  formData.append("file", picture);
+  const response = await fetchData(
+    `${backendUrl}users/picture/${user.username}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+      body: formData,
+    }
+  );
+  return response;
 };
 
 const putUser = async (user, userData) => {
@@ -157,5 +174,6 @@ export {
   getUserByName,
   getProfilePicture,
   postLogin,
+  postProfilePicture,
   putUser,
 };

@@ -6,8 +6,10 @@ import {
   logOut,
   authorize,
   findUserByName,
+  editUserPicture,
 } from "../controllers/userController.js";
 import requireAuth from "../auth/auth.js";
+import {upload, createThumbnail} from "../middleware/thumbnail.js";
 
 const userRouter = express.Router();
 
@@ -15,7 +17,21 @@ userRouter.get("/one/:username", findUserByName);
 
 userRouter.post("/create", createUser);
 
-userRouter.put("/edit/:username", requireAuth, editUser);
+userRouter.post(
+  "/picture/:username",
+  upload.single("file"),
+  requireAuth,
+  createThumbnail,
+  editUserPicture
+);
+
+userRouter.put(
+  "/edit/:username",
+  requireAuth,
+  upload.single("file"),
+  createThumbnail,
+  editUser
+);
 
 userRouter.post("/login", login);
 

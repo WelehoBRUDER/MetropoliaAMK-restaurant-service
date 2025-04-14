@@ -53,8 +53,13 @@ const createUser = async (req, res) => {
 const editUser = async (req, res) => {
   const {username} = req.params;
   let {fullname, email, password} = req.body;
+  const picture = req.files;
   try {
     const user = await User.findOne({username: username});
+
+    if (!user) {
+      return res.status(404).send({message: "User not found"});
+    }
 
     await user.updateOne({
       fullname: fullname ?? user.fullname,
@@ -64,6 +69,31 @@ const editUser = async (req, res) => {
     res.status(201).send({user: user._id});
   } catch (err) {
     res.status(400).send(err);
+  }
+};
+
+const editUserPicture = async (req, res) => {
+  console.log("FILE", req.file);
+  const {username} = req.params;
+  const picture = req.file;
+  try {
+    const user = await User.findOne({username: username});
+    if (!user) {
+      return res.status(404).send({message: "User not found"});
+    }
+    if (!picture) {
+      return res.status(400).send({message: "No picture provided"});
+    }
+
+    const suffix = picture.originalname.split(".").pop();
+
+    await user.updateOne({
+      profile_picture: `${picture.filename}_thumb.${suffix}` ?? user.password,
+    });
+    res.status(201).send({user: user._id});
+  } catch (error) {
+    console.error("Error updating user picture:", error);
+    res.status(500).send({message: "Internal server error"});
   }
 };
 
@@ -103,4 +133,12 @@ const findUserByName = async (req, res) => {
   await res.status(200).send({user: user});
 };
 
-export {findUserByName, createUser, editUser, login, logOut, authorize};
+export {
+  findUserByName,
+  createUser,
+  editUser,
+  login,
+  logOut,
+  authorize,
+  editUserPicture,
+};
