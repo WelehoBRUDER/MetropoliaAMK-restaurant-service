@@ -11,8 +11,8 @@ const createMealRow = (meal) => {
   const {name, price, diets} = meal;
   mealRow.innerHTML = `
     <div class="name"><h3>${name}</h3></div>
-    <div class="price"><p>${price}</p></div>
-    <div class="info"><p>${diets}</p></div>
+    ${price ? `<div class="price"><p>${price}</p></div>` : ``}
+    ${diets ? `<div class="info"><p>${diets}</p></div>` : ``}
   `;
   return mealRow;
 };

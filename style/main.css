@@ -150,7 +150,7 @@ button {
     border-right: 0.2rem solid var(--theme);
   }
 
-  &:hover:not(.no-bg) {
+  &:hover:not(.no-bg, .day-button) {
     background: var(--theme-dark);
     box-shadow: 0 0rem 0.8rem var(--shadow);
   }
@@ -222,4 +222,10 @@ form {
   li:hover {
     background: var(--theme-dark);
   }
+}
+
+.day-button {
+  width: 12rem;
+  border-radius: 6rem;
+  margin: 0.2rem;
 }

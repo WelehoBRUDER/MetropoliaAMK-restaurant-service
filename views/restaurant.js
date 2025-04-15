@@ -2,6 +2,7 @@ import createHeader from "../components/header.js";
 import {getRestaurantById} from "../script/session.js";
 import {createMealDisplay} from "../components/meals.js";
 import {getWeeklyMeals} from "../routes/routes.js";
+import {getDateOfWeekday} from "../lib/dates.js";
 
 createHeader();
 
@@ -14,26 +15,35 @@ let currentWeekDay = days[new Date().getDay() - 1]; // Monday is 0, Sunday is 6
 
 const updateRestaurantName = () => {
   restaurantName.innerText = `${restaurant.company} | ${restaurant.name}`;
+  document.title = `${restaurant.name} Meals | SRS`;
+};
+
+const capitalize = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 const initDaySelector = () => {
   const daySelector = document.querySelector(".day-selector");
-  Object.values(daySelector.children).forEach((day) => {
-    if (currentWeekDay === day.getAttribute("data-value")) {
-      day.classList.add("selected");
+  days.forEach((day) => {
+    const dayButton = document.createElement("button");
+    dayButton.classList.add("day-button");
+    dayButton.textContent = capitalize(day) + " " + getDateOfWeekday(day);
+    if (currentWeekDay === day) {
+      dayButton.classList.add("selected");
+      dayButton.textContent = "Today";
     }
-    day.addEventListener("click", (e) => {
-      currentWeekDay = e.currentTarget.getAttribute("data-value");
+    dayButton.addEventListener("click", (e) => {
+      currentWeekDay = day;
       document.querySelector(".selected").classList.remove("selected");
-      e.currentTarget.classList.add("selected");
-      getDailyMeals(currentWeekDay);
+      dayButton.classList.add("selected");
+      displayDailyMeals(currentWeekDay);
     });
+    daySelector.appendChild(dayButton);
   });
 };
 
-const getDailyMeals = (day) => {
-  const index = days.indexOf(day);
-  const mealsForDay = meals.days[index];
+const displayDailyMeals = async (day) => {
+  const mealsForDay = await getMealForDay(day);
   if (mealsForDay) {
     createMealDisplay(mealsForDay);
   } else {
@@ -45,7 +55,16 @@ const getDailyMeals = (day) => {
 
 const getAllMeals = async () => {
   meals = await getWeeklyMeals(restaurantId);
-  getDailyMeals(currentWeekDay);
+  displayDailyMeals(currentWeekDay);
+};
+
+const getMealForDay = async (day) => {
+  const index = days.indexOf(day);
+  if (meals.days[index]) {
+    return meals.days[index];
+  } else {
+    return null;
+  }
 };
 
 updateRestaurantName();
