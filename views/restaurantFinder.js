@@ -6,14 +6,19 @@ import {mapIcons} from "../icons/icons.js";
 import {
   getRestaurants,
   getCompanies,
-  filterByCompany,
+  getCities,
+  filterRestaurants,
 } from "../script/filterRestaurants.js";
+import {createRestaurantsTable} from "../components/restaurantsTable.js";
 
 const detailsText = document.querySelector(".restaurant-name");
 const detailsLink = document.querySelector("#restaurant-details");
 const companyFilterTool = document.querySelector(".company-filter");
+const restaurantList = document.querySelector(".restaurant-list-container");
+const cityFilterTool = document.querySelector(".city-filter");
 let prevMarker = null;
 let includeCompanies = [];
+let city = "All";
 
 const updateInfo = () => {
   if (session.current.selected.length <= 1) {
@@ -55,13 +60,15 @@ const createRestaurantPopups = (restaurants) => {
 const selectRestaurant = async (restaurant, marker) => {
   updateSession("selected", restaurant._id);
   updateInfo();
-  if (prevMarker) {
+  if (prevMarker?._icon) {
     prevMarker.setIcon(mapIcons.restaurant);
     prevMarker._icon.classList.add("restaurant-marker");
   }
-  marker.setIcon(mapIcons.selected);
-  marker._icon.classList.add("restaurant-marker");
-  prevMarker = marker;
+  if (marker?._icon) {
+    marker.setIcon(mapIcons.selected);
+    marker._icon.classList.add("restaurant-marker");
+    prevMarker = marker;
+  }
   zoomTo(restaurant);
 };
 
@@ -88,10 +95,35 @@ const createCompanyFilter = () => {
           (company) => company !== checkbox.value
         );
       }
-      filterByCompany(includeCompanies, []);
-      createRestaurantPopups(getRestaurants());
+      filterAndRefresh();
     });
   });
+};
+
+const createCityFilter = () => {
+  const cities = getCities();
+  cityFilterTool.innerHTML = "";
+  cities.forEach((cityName) => {
+    const option = document.createElement("option");
+    option.value = cityName;
+    option.textContent = cityName;
+
+    cityFilterTool.append(option);
+  });
+  cityFilterTool.value = city;
+  cityFilterTool.addEventListener("change", () => {
+    city = cityFilterTool.value;
+    filterAndRefresh();
+  });
+};
+
+const filterAndRefresh = () => {
+  filterRestaurants({
+    company: {include: includeCompanies, exclude: []},
+    city,
+  });
+  createRestaurantPopups(getRestaurants());
+  createRestaurantsTable(restaurantList, getRestaurants(), selectRestaurant);
 };
 
 const zoomTo = (restaurant) => {
@@ -102,4 +134,10 @@ const zoomTo = (restaurant) => {
 createHeader();
 addSearch({callback: selectRestaurant});
 createCompanyFilter();
+createCityFilter();
 createRestaurantPopups(session.current.restaurants);
+createRestaurantsTable(
+  restaurantList,
+  session.current.restaurants,
+  selectRestaurant
+);

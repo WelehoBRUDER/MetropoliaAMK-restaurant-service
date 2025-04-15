@@ -16,10 +16,31 @@ const getCompanies = () => {
   return [...companies].sort((a, b) => a.localeCompare(b));
 };
 
+const getCities = () => {
+  const cities = new Set();
+  [...session.current.restaurants].forEach((restaurant) => {
+    cities.add(restaurant.city);
+  });
+  cities.add("All");
+  return [...cities].sort((a, b) => a.localeCompare(b));
+};
+
+const filterRestaurants = (options) => {
+  if (!restaurants) return;
+  restaurants = [...session.current.restaurants];
+  if (options?.company) {
+    const {include, exclude} = options.company;
+    console.log(include, exclude);
+    filterByCompany(include, exclude);
+  }
+  if (options?.city) {
+    filterByCity(options.city);
+  }
+};
+
 // Filters restaurants based on companies you want to include or exclude
 const filterByCompany = (include, exclude) => {
-  if (include.length === 0 && exclude.length === 0) return restaurants;
-  restaurants = [...session.current.restaurants];
+  if (include.length === 0 && exclude.length === 0) return;
   restaurants = restaurants.filter((restaurant) => {
     const company = restaurant.company.toLowerCase();
     const includeMatch = include.some((inc) =>
@@ -32,9 +53,16 @@ const filterByCompany = (include, exclude) => {
   });
 };
 
+const filterByCity = (city) => {
+  if (city === "All") return;
+  restaurants = restaurants.filter((restaurant) => {
+    return restaurant.city.toLowerCase() === city.toLowerCase();
+  });
+};
+
 const getRestaurants = () => {
   return restaurants;
 };
 
 loadRestaurants();
-export {getRestaurants, getCompanies, filterByCompany};
+export {getRestaurants, getCompanies, getCities, filterRestaurants};

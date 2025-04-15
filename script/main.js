@@ -42,6 +42,7 @@ const addSearch = (options) => {
         li.title = result.name;
         li.addEventListener("click", () => {
           if (options?.callback) {
+            search.value = result.name;
             searchResults.innerHTML = "";
             options.callback(result);
           } else {
