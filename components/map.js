@@ -24,10 +24,18 @@ const addMarker = (lat, lon, name, icon, callback) => {
   return marker;
 };
 
+const clearMarkers = () => {
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Marker) {
+      layer.remove();
+    }
+  });
+};
+
 const updatePosition = (loc) => {
   const pos = loc ? loc : getGeoLocation();
   map.setView(pos, 13);
   updateSession("pos", pos);
 };
 
-export {addMarker, updatePosition};
+export {addMarker, updatePosition, clearMarkers};

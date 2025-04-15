@@ -6,14 +6,21 @@ let restaurants = [];
 const loadRestaurants = async () => {
   await loadSession();
   restaurants = [...session.current.restaurants];
-  console.log(restaurants);
+};
+
+const getCompanies = () => {
+  const companies = new Set();
+  [...session.current.restaurants].forEach((restaurant) => {
+    companies.add(restaurant.company);
+  });
+  return [...companies].sort((a, b) => a.localeCompare(b));
 };
 
 // Filters restaurants based on companies you want to include or exclude
 const filterByCompany = (include, exclude) => {
   if (include.length === 0 && exclude.length === 0) return restaurants;
   restaurants = [...session.current.restaurants];
-  return restaurants.filter((restaurant) => {
+  restaurants = restaurants.filter((restaurant) => {
     const company = restaurant.company.toLowerCase();
     const includeMatch = include.some((inc) =>
       company.includes(inc.toLowerCase())
@@ -30,4 +37,4 @@ const getRestaurants = () => {
 };
 
 loadRestaurants();
-export {getRestaurants};
+export {getRestaurants, getCompanies, filterByCompany};
