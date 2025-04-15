@@ -3,6 +3,7 @@ import {putUser, postProfilePicture} from "../routes/routes.js";
 const editUserProfile = (user) => {
   const section = document.querySelector("#profile");
 
+  section.classList.add("dark-text");
   section.innerHTML = `
       <form method="post" id="edit-form">
         <p id="edit-error" class="error-message"></p>

@@ -3,6 +3,7 @@ import {getProfilePicture} from "../routes/routes.js";
 const userProfile = async (user, options) => {
   const section = document.querySelector("#profile");
   const imgUrl = await getProfilePicture(user.profile_picture);
+  section.classList.add("dark-text");
   section.innerHTML = `
     <h2>${user.fullname}</h2>
     <img src="${imgUrl}" alt="Profile picture of ${

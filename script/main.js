@@ -3,8 +3,8 @@ import {session, loadSession, updateSession} from "./session.js";
 import {addMarker, updatePosition} from "../components/map.js";
 import {createMealDisplay} from "../components/meals.js";
 
-const search = document.querySelector("#map .search input");
-const searchResults = document.querySelector("#map .search-results");
+const search = document.querySelector(".search input");
+const searchResults = document.querySelector(".search-results");
 
 if (search) {
   search.addEventListener("input", () => {

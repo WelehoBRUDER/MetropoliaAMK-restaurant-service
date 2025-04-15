@@ -2,6 +2,7 @@ import {getUserData} from "../script/userData.js";
 import {getUserByName} from "../routes/routes.js";
 import {userProfile} from "../components/userProfile.js";
 import {editUserProfile} from "../components/editUserProfile.js";
+import createHeader from "../components/header.js";
 
 const createUserProfile = async () => {
   const params = new URLSearchParams(window.location.search);
@@ -21,4 +22,5 @@ const createUserProfile = async () => {
   }
 };
 
+createHeader();
 createUserProfile();

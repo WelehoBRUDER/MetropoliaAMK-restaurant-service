@@ -11,18 +11,33 @@ body {
 }
 
 .dark-text {
-  * {
+  *:not(button) {
     color: var(--theme);
     font-size: 1.6rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
   }
 }
 
 .white-text {
-  * {
+  *:not(button) {
     color: var(--contrast);
     font-size: 1.6rem;
   }
 
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
 }
 
 header#header {
@@ -192,4 +207,8 @@ form {
   text-align: center;
   margin: 0;
   padding: 0;
+}
+
+.title {
+  text-align: center;
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Restaurant Service</title>
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="style/leaflet.css" />
+  <script src="lib/leaflet.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style/variables.css">
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="style/daily-meals.css">
+
+  <!-- Import view -->
+  <script src="views/restaurant.js" type="module"></script>
+</head>
+
+<body>
+  <header id="header" class="white-text"></header>
+  <main id="service-body">
+    <div class="title dark-text">
+      <h1>[RESTAURANT NAME]</h1>
+    </div>
+    <div class="service-list">
+      <nav>
+        <button class="selected">Mon</button>
+        <button>Tue</button>
+        <button>Wed</button>
+        <button>Thu</button>
+        <button>Fri</button>
+        <button>Sat</button>
+        <button>Sun</button>
+        <button>Whole week</button>
+      </nav>
+      <div class="current-meals dark-text">
+        <div class="meal-display">
+          <div class="name">Chilillä ja suklaalla maustettua kasvispataa luomumustapavuista ja basmatiriisiä</div>
+          <div class="price">2,95€/5,90€/8,50€</div>
+          <div class="info">G M</div>
+        </div>
+        <div class="meal-display">
+          <div class="name">Juustoisia parsakaalipihvejä 2 kpl/annos, persilja-kermaviiliä ja perunaa</div>
+          <div class="price">2,95€/5,90€/8,50€</div>
+          <div class="info">G L</div>
+        </div>
+        <div class="meal-display">
+          <div class="name">Makkarakastiketta ja perunamuusia</div>
+          <div class="price">2,95€/5,90€/8,50€</div>
+          <div class="info">L</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

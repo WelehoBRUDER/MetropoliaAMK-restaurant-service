@@ -1,4 +1,5 @@
 import {login, hasToken} from "../script/user.js";
+import createHeader from "../components/header.js";
 
 const loginForm = document.querySelector("#login-form");
 loginForm.addEventListener("submit", async (e) => {
@@ -21,3 +22,5 @@ const loginError = document.querySelector("#login-error");
 if (hasToken()) {
   window.location.href = "/";
 }
+
+createHeader();
