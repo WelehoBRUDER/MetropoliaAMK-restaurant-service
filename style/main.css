@@ -25,7 +25,7 @@ body {
   }
 }
 
-.white-text {
+.white-text {h
   *:not(button) {
     color: var(--contrast);
     font-size: 1.6rem;
@@ -41,44 +41,73 @@ body {
 }
 
 header#header {
-  background: var(--theme);
-  width: 100%;
-  height: 10rem;
-  padding: 0.5rem 1.5rem;
-  margin: 0;
-  position: relative;
-  top: 0;
-  left: 0;
-  box-sizing: border-box;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--theme);
+  color: var(--contrast);
+  padding: 0.5rem 2rem; 
+  box-shadow: 0 0.4rem 0.6rem var(--shadow); /* 4px x 6px shadow */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
-  > * {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  /* Logo and title */
+  .logo-title h1 a {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--contrast);
+    margin: 0;
+    transition: color 0.2s ease;
   }
 
-  > :nth-child(odd) {
-    width: 30%;
-  }
+  .user-details {
 
-  > :nth-child(even) {
-    justify-content: center;
-    width: 40%;
-  }
+    span {
+      margin: 0;
+      font-size: 1.6rem;
+    }
 
-  .logo-title {
-    h1 > a {
-      font-size: 2.2rem;
+    .profile-picture {
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 100%;
+      border: 0.2rem solid var(--contrast);
+      background: var(--theme-dark);
+      margin: 0;
     }
   }
 
-  .user-profile {
-    justify-content: flex-end;
+
+  /* Middle nav (like Home, Explore, etc.) */
+  .middle-nav a {
+    margin: 0 1rem; 
+    text-decoration: none;
+    color: var(--contrast);
+    font-weight: 500;
+    font-size: 1.8rem; 
+    transition: color 0.2s ease;
   }
+
+  .middle-nav a:hover, h1 a:hover {
+    color: var(--bright);
+  }
+
+  /* User profile area (e.g. login, profile icon) */
+  .user-profile a {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: var(--contrast);
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+  }
+
+  .user-profile a:hover {
+    color: var(--bright);
+  }
+
 }
 
 main#service-body {
@@ -125,7 +154,7 @@ input[type="text"]:not(.normal-input) {
   }
 }
 
-button {
+button, .button {
   transition: box-shadow 0.15s ease-out;
   background: var(--theme);
   color: var(--contrast);

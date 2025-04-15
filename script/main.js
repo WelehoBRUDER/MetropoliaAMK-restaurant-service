@@ -63,7 +63,6 @@ const main = async () => {
   if (session.current.restaurants.length === 0) {
     updateSession("restaurants", await getAllRestaurants());
   }
-  //createRestaurantPopups(session.current.restaurants);
 };
 
 export {main, addSearch};

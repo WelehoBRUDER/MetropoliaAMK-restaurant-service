@@ -102,10 +102,11 @@ const getMeByToken = async (token) => {
     if (response?.user !== undefined) {
       return response.user;
     } else {
-      throw new Error(response);
+      throw new Error(response.error);
     }
   } catch (error) {
-    return error;
+    console.warn("Error fetching user data: " + error.message);
+    return null;
   }
 };
 
