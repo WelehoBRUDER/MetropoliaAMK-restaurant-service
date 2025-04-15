@@ -2,12 +2,13 @@ import createHeader from "../components/header.js";
 import {addMarker, updatePosition} from "../components/map.js";
 import {updateSession, session} from "../script/session.js";
 import {addSearch} from "../script/main.js";
+import {mapIcons} from "../icons/icons.js";
 
 const detailsText = document.querySelector(".restaurant-name");
 const detailsLink = document.querySelector("#restaurant-details");
+let prevMarker = null;
 
 const updateInfo = () => {
-  console.log(session.current.selected);
   if (session.current.selected.length <= 1) {
     detailsText.textContent = "No restaurant selected";
     detailsLink.querySelector("button").disabled = true;
@@ -26,15 +27,33 @@ updateInfo();
 const createRestaurantPopups = (restaurants) => {
   for (const restaurant of restaurants) {
     const location = restaurant.location.coordinates;
-    addMarker(location[1], location[0], restaurant.name, () =>
-      selectRestaurant(restaurant)
+    const icon =
+      restaurant._id === session.current.selected
+        ? mapIcons.selected
+        : mapIcons.restaurant;
+    const m = addMarker(
+      location[1],
+      location[0],
+      restaurant.name,
+      icon,
+      (marker) => selectRestaurant(restaurant, marker)
     );
+    if (restaurant._id === session.current.selected) {
+      prevMarker = m;
+    }
   }
 };
 
-const selectRestaurant = async (restaurant) => {
+const selectRestaurant = async (restaurant, marker) => {
   updateSession("selected", restaurant._id);
   updateInfo();
+  if (prevMarker) {
+    prevMarker.setIcon(mapIcons.restaurant);
+    prevMarker._icon.classList.add("restaurant-marker");
+  }
+  marker.setIcon(mapIcons.selected);
+  marker._icon.classList.add("restaurant-marker");
+  prevMarker = marker;
   zoomTo(restaurant);
 };
 

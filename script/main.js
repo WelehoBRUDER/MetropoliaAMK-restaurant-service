@@ -39,6 +39,7 @@ const addSearch = (options) => {
       results.forEach((result) => {
         const li = document.createElement("li");
         li.innerHTML = result.name;
+        li.title = result.name;
         li.addEventListener("click", () => {
           if (options?.callback) {
             searchResults.innerHTML = "";

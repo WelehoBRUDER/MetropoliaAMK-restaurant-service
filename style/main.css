@@ -126,11 +126,6 @@ main#service-body {
     align-items: center;
   }
 
-  #map {
-    position: relative;
-  }
-
-
 }
 
 .input-container {
@@ -203,9 +198,11 @@ form {
 }
 
 #map {
+  position: relative;
   width: 100%;
   height: 60rem;
-  max-width: 120rem;
+  max-width: 90rem;
+  margin-top: 6rem;
 }
 
 .error-message {
@@ -245,11 +242,16 @@ form {
   box-shadow: 0 0.2rem 0.4rem var(--shadow);
   background: var(--theme);
   width: 30rem;
+  max-height: 50vh;
+  overflow: hidden;
+  overflow-y: auto;
 
   li {
     padding: 1rem;
     font-size: 2rem;
     color: var(--contrast);
+    text-overflow: ellipsis;
+    overflow: hidden;
     cursor: pointer;
   }
 
@@ -269,4 +271,16 @@ form {
   flex-direction: row;
   align-items: center;
   gap: 2rem;
+}
+
+
+.map-top-bar {
+  position: absolute;
+  top: -0.6rem;
+  margin: 0;
+}
+
+.restaurant-marker {
+  border-radius: 100%;
+  filter: drop-shadow(0 0.2rem 0.4rem var(--shadow));
 }

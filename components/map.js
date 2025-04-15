@@ -14,12 +14,14 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
  * @param {*} name - popup name
  * @param {*} callback -
  */
-const addMarker = (lat, lon, name, callback) => {
-  const marker = L.marker([lat, lon]).addTo(map);
+const addMarker = (lat, lon, name, icon, callback) => {
+  const marker = L.marker([lat, lon], {icon: icon}).addTo(map);
   marker.bindPopup(name);
+  marker._icon.classList.add("restaurant-marker");
   marker.on("click", () => {
-    callback();
+    callback(marker);
   });
+  return marker;
 };
 
 const updatePosition = (loc) => {
