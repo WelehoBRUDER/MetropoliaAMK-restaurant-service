@@ -1,7 +1,7 @@
 import {getAllRestaurants, getDailyMeals} from "../routes/routes.js";
 import {session, loadSession, updateSession} from "./session.js";
 
-const addSearch = () => {
+const addSearch = (options) => {
   const search = document.querySelector(".search input");
   const searchResults = document.querySelector(".search-results");
 
@@ -39,23 +39,17 @@ const addSearch = () => {
       results.forEach((result) => {
         const li = document.createElement("li");
         li.innerHTML = result.name;
-        console.log(result);
         li.addEventListener("click", () => {
-          selectRestaurant(result);
-          searchResults.innerHTML = "";
+          if (options?.callback) {
+            searchResults.innerHTML = "";
+            options.callback(result);
+          } else {
+            selectRestaurant(result);
+          }
         });
         searchResults.append(li);
       });
     };
-  }
-};
-
-const createRestaurantPopups = (restaurants) => {
-  for (const restaurant of restaurants) {
-    const location = restaurant.location.coordinates;
-    addMarker(location[1], location[0], restaurant.name, () =>
-      selectRestaurant(restaurant)
-    );
   }
 };
 

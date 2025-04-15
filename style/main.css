@@ -135,6 +135,11 @@ button {
   font-size: 2rem;
   border-radius: 0.7rem;
 
+  &:disabled {
+    filter: brightness(0.8);
+    pointer-events: none;
+  }
+
   &.no-bg {
     background: none;
     border-radius: 0;
@@ -228,4 +233,11 @@ form {
   width: 12rem;
   border-radius: 6rem;
   margin: 0.2rem;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
 }

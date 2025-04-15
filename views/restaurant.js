@@ -60,7 +60,7 @@ const getAllMeals = async () => {
 
 const getMealForDay = async (day) => {
   const index = days.indexOf(day);
-  if (meals.days[index]) {
+  if (meals?.days?.[index]) {
     return meals.days[index];
   } else {
     return null;
