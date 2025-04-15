@@ -7,10 +7,13 @@ import {
   getRestaurants,
   getCompanies,
   getCities,
+  getNearestRestaurant,
   filterRestaurants,
 } from "../script/filterRestaurants.js";
 import {createRestaurantsTable} from "../components/restaurantsTable.js";
+import {getGeoLocation} from "../lib/geo.js";
 
+const navigatorButton = document.querySelector(".navigator");
 const detailsText = document.querySelector(".restaurant-name");
 const detailsLink = document.querySelector("#restaurant-details");
 const companyFilterTool = document.querySelector(".company-filter");
@@ -129,6 +132,16 @@ const filterAndRefresh = () => {
 const zoomTo = (restaurant) => {
   const cords = [...restaurant.location.coordinates].reverse();
   updatePosition(cords);
+};
+
+navigatorButton.addEventListener("click", () => {
+  goToNearestRestaurant();
+});
+
+const goToNearestRestaurant = async () => {
+  const currentLocation = await getGeoLocation();
+  const nearestRestaurant = getNearestRestaurant(...currentLocation);
+  selectRestaurant(nearestRestaurant);
 };
 
 createHeader();

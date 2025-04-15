@@ -1,4 +1,4 @@
-import {getGeoLocation, calculateDistance} from "../lib/geo.js";
+import {calculateDistance} from "../lib/geo.js";
 import {session, loadSession} from "./session.js";
 
 let restaurants = [];
@@ -38,6 +38,22 @@ const filterRestaurants = (options) => {
   }
 };
 
+const getNearestRestaurant = (lat, lon) => {
+  if (!restaurants) return null;
+  let nearestRestaurant = null;
+  let nearestDistance = Infinity;
+
+  restaurants.forEach((restaurant) => {
+    const restCords = [...restaurant.location.coordinates];
+    const distance = calculateDistance(lat, lon, ...restCords.reverse());
+    if (distance < nearestDistance) {
+      nearestDistance = distance;
+      nearestRestaurant = restaurant;
+    }
+  });
+  return nearestRestaurant;
+};
+
 // Filters restaurants based on companies you want to include or exclude
 const filterByCompany = (include, exclude) => {
   if (include.length === 0 && exclude.length === 0) return;
@@ -65,4 +81,10 @@ const getRestaurants = () => {
 };
 
 loadRestaurants();
-export {getRestaurants, getCompanies, getCities, filterRestaurants};
+export {
+  getRestaurants,
+  getCompanies,
+  getCities,
+  filterRestaurants,
+  getNearestRestaurant,
+};

@@ -21,14 +21,16 @@
 <body>
   <header id="header" class="white-text"></header>
   <main id="service-body">
-    <div class="map-top-bar flex-row dark-text">
-      <div class="input-container search">
+    <div class="map-top-bar flex-row">
+      <div class="input-container search forced">
         <input type="text" placeholder="Search for a restaurant">
         <button class="no-bg">Search</button>
       </div>
       <div class="company-filter flex-row"></div>
       <select name="city-filter" class="city-filter"></select>
-      <div class="search-results"></div>
+      <button class="navigator"><img src="icons/near_me_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png"
+          title="Find nearest restaurant"></button>
+      <div class="search-results on-map"></div>
     </div>
     <div id="map">
     </div>

@@ -4,7 +4,6 @@ const createRestaurantsTable = (table, restaurants, callback) => {
       <th>Name</th>
       <th>Company</th>
       <th>City</th>
-      <th>Actions</th>
     <th>
   `;
   restaurants.forEach((restaurant) => {
@@ -20,9 +19,6 @@ const createRestaurant = (restaurant, callback) => {
     <td class="restaurant-name">${restaurant.name}</td>
     <td>${restaurant.company}</td>
     <td>${restaurant.city}</td>
-    <td>
-      <button class="favorite-restaurant" data-id="${restaurant._id}">Favorite</button>
-    </td>
   `;
   restaurantElement
     .querySelector(".restaurant-name")
