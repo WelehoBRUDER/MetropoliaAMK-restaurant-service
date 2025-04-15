@@ -2,6 +2,8 @@ import {getUserData} from "../script/userData.js";
 import {getUserByName} from "../routes/routes.js";
 import {userProfile} from "../components/userProfile.js";
 import {editUserProfile} from "../components/editUserProfile.js";
+import {getFavorites} from "../script/filterRestaurants.js";
+import {createRestaurantsTable} from "../components/restaurantsTable.js";
 import createHeader from "../components/header.js";
 
 const createUserProfile = async () => {
@@ -19,6 +21,21 @@ const createUserProfile = async () => {
     editUserProfile(user, {detailed: ownProfile, editable: ownProfile});
   } else {
     userProfile(user, {detailed: ownProfile, editable: ownProfile});
+  }
+  const favorites = await getFavorites();
+  const favoritesContainer = document.querySelector(".favorites-container");
+  if (favoritesContainer) {
+    if (favorites.length === 0) {
+      favoritesContainer.innerHTML = `<p>No favorites yet.</p>`;
+    } else {
+      favoritesContainer.innerHTML = `<h2>Favorite Restaurants</h2>`;
+      const table = document.createElement("table");
+      table.classList.add("restaurant-list-container");
+      createRestaurantsTable(table, favorites, (restaurant) => {
+        window.location.href = `restaurant-view.html?id=${restaurant._id}`;
+      });
+      favoritesContainer.append(table);
+    }
   }
 };
 

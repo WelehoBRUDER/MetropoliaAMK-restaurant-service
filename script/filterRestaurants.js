@@ -84,8 +84,9 @@ const getRestaurants = () => {
 const getFavorites = async () => {
   const userData = await getUserData();
   if (!userData) return [];
+  console.log(restaurants);
   return restaurants.filter((restaurant) => {
-    userData.favorites.includes(restaurant._id);
+    return userData.favorite_restaurants.includes(restaurant._id);
   });
 };
 

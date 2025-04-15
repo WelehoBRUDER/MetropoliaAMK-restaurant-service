@@ -23,11 +23,11 @@
     letter-spacing: 0.05rem;
   }
   
-  .restaurant-item:nth-child(even) {
+  .restaurant-item:nth-child(odd) {
     background-color: var(--theme);
   }
   
-  .restaurant-item:nth-child(odd) {
+  .restaurant-item:nth-child(even) {
     background-color: var(--theme-dark);
   }
   

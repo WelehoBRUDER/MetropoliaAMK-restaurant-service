@@ -183,9 +183,13 @@ const updateFavoriteStar = async () => {
   if (!session.current.selected) return;
   const icon = addToFavoritesButton.querySelector("img");
   const isFav = await isFavorite(session.current.selected);
-  icon.src = isFav
-    ? "../icons/star_rate_24dp_B89230_FILL0_wght400_GRAD0_opsz24.png"
-    : "../icons/star_rate_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png";
+  if (isFav) {
+    icon.src = "../icons/star_rate_24dp_B89230_FILL0_wght400_GRAD0_opsz24.png";
+    addToFavoritesButton.title = "Remove from favorites";
+  } else {
+    icon.src = "../icons/star_rate_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png";
+    addToFavoritesButton.title = "Add to favorites";
+  }
   if (session.current.selected) {
     updateCurrentMarker();
   }

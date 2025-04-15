@@ -35,8 +35,8 @@ const createHeader = async () => {
         <span class="username">${user.fullname}</span>
       </div>
       <nav class="user-nav">
-        <a href="favorites.html">Favourite restaurants</a>
-        <a href="profile.html?id=${user.username}">My profile</a>
+      <a href="profile.html?id=${user.username}">My profile</a>
+      <a href="logout.html">Log out</a>
       </nav>
     `;
   }

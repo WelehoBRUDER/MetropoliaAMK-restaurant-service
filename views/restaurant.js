@@ -3,9 +3,12 @@ import {getRestaurantById} from "../script/session.js";
 import {createMealDisplay} from "../components/meals.js";
 import {getWeeklyMeals} from "../routes/routes.js";
 import {getDateOfWeekday} from "../lib/dates.js";
+import {isFavorite} from "../script/filterRestaurants.js";
+import {postAddFavorite, postRemoveFavorite} from "../routes/routes.js";
 
 createHeader();
 
+const starButton = document.querySelector(".star");
 const restaurantId = new URLSearchParams(window.location.search).get("id");
 const restaurant = getRestaurantById(restaurantId);
 const restaurantName = document.querySelector("#restaurant-name");
@@ -17,6 +20,28 @@ const updateRestaurantName = () => {
   restaurantName.innerText = `${restaurant.company} | ${restaurant.name}`;
   document.title = `${restaurant.name} Meals | SRS`;
 };
+
+const updateStar = async () => {
+  const img = starButton.querySelector("img");
+  if (await isFavorite(restaurantId)) {
+    img.src = "icons/star_64dp_EAC452_FILL0_wght400_GRAD0_opsz48.png";
+    starButton.title = "Remove from favorites";
+  } else {
+    img.src = "icons/star_64dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png";
+    starButton.title = "Add to favorites";
+  }
+};
+
+starButton.addEventListener("click", async () => {
+  const isFav = await isFavorite(restaurantId);
+  if (isFav) {
+    await postRemoveFavorite(restaurantId);
+    updateStar();
+  } else {
+    await postAddFavorite(restaurantId);
+    updateStar();
+  }
+});
 
 const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -70,3 +95,4 @@ const getMealForDay = async (day) => {
 updateRestaurantName();
 getAllMeals();
 initDaySelector();
+updateStar();
