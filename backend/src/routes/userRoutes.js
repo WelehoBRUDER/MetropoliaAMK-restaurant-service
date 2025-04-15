@@ -7,6 +7,8 @@ import {
   authorize,
   findUserByName,
   editUserPicture,
+  addFavoriteRestaurant,
+  removeFavoriteRestaurant,
 } from "../controllers/userController.js";
 import requireAuth from "../auth/auth.js";
 import {upload, createThumbnail} from "../middleware/thumbnail.js";
@@ -38,5 +40,9 @@ userRouter.post("/login", login);
 userRouter.get("/logout", logOut);
 
 userRouter.get("/me", requireAuth, authorize);
+
+userRouter.post("/favorite/:id", requireAuth, addFavoriteRestaurant);
+
+userRouter.post("/remove-favorite/:id", requireAuth, removeFavoriteRestaurant);
 
 export default userRouter;

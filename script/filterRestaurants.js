@@ -1,5 +1,6 @@
 import {calculateDistance} from "../lib/geo.js";
 import {session, loadSession} from "./session.js";
+import {getUserData} from "./userData.js";
 
 let restaurants = [];
 
@@ -80,6 +81,20 @@ const getRestaurants = () => {
   return restaurants;
 };
 
+const getFavorites = async () => {
+  const userData = await getUserData();
+  if (!userData) return [];
+  return restaurants.filter((restaurant) => {
+    userData.favorites.includes(restaurant._id);
+  });
+};
+
+const isFavorite = async (restaurantId) => {
+  const userData = await getUserData();
+  if (!userData) return false;
+  return userData.favorite_restaurants.includes(restaurantId);
+};
+
 loadRestaurants();
 export {
   getRestaurants,
@@ -87,4 +102,6 @@ export {
   getCities,
   filterRestaurants,
   getNearestRestaurant,
+  getFavorites,
+  isFavorite,
 };

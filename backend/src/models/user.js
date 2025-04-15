@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
   fullname: String,
   profile_picture: String,
   date_registered: Date,
-  favorite_restaurants: Array,
+  favorite_restaurants: [String],
 });
 
 UserSchema.pre("save", async function (next) {

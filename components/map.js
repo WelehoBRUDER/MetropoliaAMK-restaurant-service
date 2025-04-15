@@ -14,9 +14,10 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
  * @param {*} name - popup name
  * @param {*} callback -
  */
-const addMarker = (lat, lon, name, icon, callback) => {
+const addMarker = (lat, lon, restaurant, icon, callback) => {
   const marker = L.marker([lat, lon], {icon: icon}).addTo(map);
-  marker.bindPopup(name);
+  marker.bindPopup(restaurant.name);
+  marker.restaurant = restaurant._id;
   marker._icon.classList.add("restaurant-marker");
   marker.on("click", () => {
     callback(marker);
@@ -32,10 +33,20 @@ const clearMarkers = () => {
   });
 };
 
+const findMarker = (restaurantId) => {
+  let marker = null;
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Marker && layer.restaurant === restaurantId) {
+      marker = layer;
+    }
+  });
+  return marker;
+};
+
 const updatePosition = (loc) => {
   const pos = loc ? loc : getGeoLocation();
   map.setView(pos, 13);
   updateSession("pos", pos);
 };
 
-export {addMarker, updatePosition, clearMarkers};
+export {addMarker, updatePosition, clearMarkers, findMarker};

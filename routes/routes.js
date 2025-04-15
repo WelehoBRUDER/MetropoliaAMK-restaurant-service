@@ -168,6 +168,34 @@ const putUser = async (user, userData) => {
   return response;
 };
 
+const postAddFavorite = async (user, restaurantId) => {
+  const response = await fetchData(
+    `${backendUrl}users/favorite/${restaurantId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+    }
+  );
+  return response;
+};
+
+const postRemoveFavorite = async (user, restaurantId) => {
+  const response = await fetchData(
+    `${backendUrl}users/remove-favorite/${restaurantId}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+    }
+  );
+  return response;
+};
+
 export {
   getAllRestaurants,
   getDailyMeals,
@@ -177,5 +205,7 @@ export {
   getProfilePicture,
   postLogin,
   postProfilePicture,
+  postAddFavorite,
+  postRemoveFavorite,
   putUser,
 };

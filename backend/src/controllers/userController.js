@@ -118,7 +118,6 @@ const logOut = async (req, res) => {
 };
 
 const authorize = async (req, res) => {
-  console.log(res.locals.user);
   if (res.locals.user?.id) {
     const user = await User.findById(res.locals.user.id);
     await res.status(200).send({user: user});
@@ -133,6 +132,38 @@ const findUserByName = async (req, res) => {
   await res.status(200).send({user: user});
 };
 
+const addFavoriteRestaurant = async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findById(res.locals.user.id);
+  if (!user) {
+    return res.status(404).send({message: "User not found"});
+  }
+  if (!user.favorite_restaurants.includes(id)) {
+    user.favorite_restaurants.push(id);
+    await user.save();
+  }
+  res
+    .status(200)
+    .send({message: "Restaurant added to favorites", status: "success"});
+};
+
+const removeFavoriteRestaurant = async (req, res) => {
+  const id = req.params.id;
+  const user = await User.findById(res.locals.user.id);
+  if (!user) {
+    return res.status(404).send({message: "User not found"});
+  }
+  if (user.favorite_restaurants.includes(id)) {
+    user.favorite_restaurants = user.favorite_restaurants.filter(
+      (restaurant) => restaurant !== id
+    );
+    await user.save();
+  }
+  res
+    .status(200)
+    .send({message: "Restaurant removed from favorites", status: "success"});
+};
+
 export {
   findUserByName,
   createUser,
@@ -141,4 +172,6 @@ export {
   logOut,
   authorize,
   editUserPicture,
+  addFavoriteRestaurant,
+  removeFavoriteRestaurant,
 };

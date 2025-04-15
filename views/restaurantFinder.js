@@ -1,5 +1,10 @@
 import createHeader from "../components/header.js";
-import {addMarker, updatePosition, clearMarkers} from "../components/map.js";
+import {
+  addMarker,
+  updatePosition,
+  clearMarkers,
+  findMarker,
+} from "../components/map.js";
 import {updateSession, session} from "../script/session.js";
 import {addSearch} from "../script/main.js";
 import {mapIcons} from "../icons/icons.js";
@@ -9,10 +14,15 @@ import {
   getCities,
   getNearestRestaurant,
   filterRestaurants,
+  isFavorite,
 } from "../script/filterRestaurants.js";
 import {createRestaurantsTable} from "../components/restaurantsTable.js";
 import {getGeoLocation} from "../lib/geo.js";
+import {postAddFavorite, postRemoveFavorite} from "../routes/routes.js";
+import {getUserData} from "../script/userData.js";
 
+const showOnMapButton = document.querySelector("#show-on-map");
+const addToFavoritesButton = document.querySelector("#add-to-favorites");
 const navigatorButton = document.querySelector(".navigator");
 const detailsText = document.querySelector(".restaurant-name");
 const detailsLink = document.querySelector("#restaurant-details");
@@ -37,22 +47,33 @@ const updateInfo = () => {
   }
 };
 
+const getRestaurantIcon = async (restaurantId) => {
+  let icon;
+  if (await isFavorite(restaurantId)) {
+    if (restaurantId === session.current.selected) {
+      icon = mapIcons.favoriteSelected;
+    } else {
+      icon = mapIcons.favorite;
+    }
+  } else {
+    if (restaurantId === session.current.selected) {
+      icon = mapIcons.selected;
+    } else {
+      icon = mapIcons.restaurant;
+    }
+  }
+  return icon;
+};
+
 updateInfo();
 
-const createRestaurantPopups = (restaurants) => {
+const createRestaurantPopups = async (restaurants) => {
   clearMarkers();
   for (const restaurant of restaurants) {
     const location = restaurant.location.coordinates;
-    const icon =
-      restaurant._id === session.current.selected
-        ? mapIcons.selected
-        : mapIcons.restaurant;
-    const m = addMarker(
-      location[1],
-      location[0],
-      restaurant.name,
-      icon,
-      (marker) => selectRestaurant(restaurant, marker)
+    let icon = await getRestaurantIcon(restaurant._id);
+    const m = addMarker(location[1], location[0], restaurant, icon, (marker) =>
+      selectRestaurant(restaurant, marker)
     );
     if (restaurant._id === session.current.selected) {
       prevMarker = m;
@@ -64,15 +85,19 @@ const selectRestaurant = async (restaurant, marker) => {
   updateSession("selected", restaurant._id);
   updateInfo();
   if (prevMarker?._icon) {
-    prevMarker.setIcon(mapIcons.restaurant);
+    prevMarker.setIcon(await getRestaurantIcon(prevMarker.restaurant));
     prevMarker._icon.classList.add("restaurant-marker");
   }
+  if (!marker) {
+    marker = findMarker(restaurant._id);
+  }
   if (marker?._icon) {
-    marker.setIcon(mapIcons.selected);
+    marker.setIcon(await getRestaurantIcon(marker.restaurant));
     marker._icon.classList.add("restaurant-marker");
     prevMarker = marker;
   }
   window.scrollTo(0, 0);
+  updateFavoriteStar();
   zoomTo(restaurant);
 };
 
@@ -145,6 +170,63 @@ const goToNearestRestaurant = async () => {
   selectRestaurant(nearestRestaurant);
 };
 
+showOnMapButton.addEventListener("click", () => {
+  const restaurant = session.current.restaurants.find(
+    (restaurant) => restaurant._id === session.current.selected
+  );
+  if (restaurant) {
+    zoomTo(restaurant);
+  }
+});
+
+const updateFavoriteStar = async () => {
+  if (!session.current.selected) return;
+  const icon = addToFavoritesButton.querySelector("img");
+  const isFav = await isFavorite(session.current.selected);
+  icon.src = isFav
+    ? "../icons/star_rate_24dp_B89230_FILL0_wght400_GRAD0_opsz24.png"
+    : "../icons/star_rate_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png";
+  if (session.current.selected) {
+    updateCurrentMarker();
+  }
+};
+
+const addToFavorites = async () => {
+  const user = await getUserData();
+  if (!user) return;
+  const response = await postAddFavorite(user, session.current.selected);
+  if (response.status === "success") {
+    await getUserData({forceReload: true});
+    updateFavoriteStar();
+  }
+};
+const removeFromFavorites = async () => {
+  const user = await getUserData();
+  if (!user) return;
+  const response = await postRemoveFavorite(user, session.current.selected);
+  if (response.status === "success") {
+    await getUserData({forceReload: true});
+    updateFavoriteStar();
+  }
+};
+
+addToFavoritesButton.addEventListener("click", async () => {
+  const isFav = await isFavorite(session.current.selected);
+  if (isFav) {
+    removeFromFavorites();
+  } else {
+    addToFavorites();
+  }
+});
+
+const updateCurrentMarker = async () => {
+  let marker = findMarker(session.current.selected);
+  if (marker?._icon) {
+    marker.setIcon(await getRestaurantIcon(marker.restaurant));
+    marker._icon.classList.add("restaurant-marker");
+  }
+};
+
 createHeader();
 addSearch({callback: selectRestaurant});
 createCompanyFilter();
@@ -155,3 +237,4 @@ createRestaurantsTable(
   session.current.restaurants,
   selectRestaurant
 );
+updateFavoriteStar();

@@ -11,8 +11,11 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="style/variables.css">
+  <link rel="stylesheet" href="style/header.css">
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/daily-meals.css">
+  <link rel="stylesheet" href="style/filter.css">
+  <link rel="stylesheet" href="style/table.css">
 
   <!-- Import view -->
   <script src="views/restaurantFinder.js" type="module"></script>
@@ -34,7 +37,10 @@
     </div>
     <div id="map">
     </div>
-    <div class="flex-row dark-text">
+    <div class="flex-row dark-bg white-text map-width center">
+      <button class="no-bg white-text" id="show-on-map">Show on map</button>
+      <button class="no-bg" title="Add to favorites" id="add-to-favorites"><img
+          src="icons/star_rate_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"></button>
       <h2 class="restaurant-name">No restaurant selected</h2>
       <a id="restaurant-details">
         <button>Go to details →</button>

@@ -1,0 +1,70 @@
+
+header#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--theme);
+  color: var(--contrast);
+  padding: 0.5rem 2rem; 
+  box-shadow: 0 0.4rem 0.6rem var(--shadow); /* 4px x 6px shadow */
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+
+  /* Logo and title */
+  .logo-title h1 a {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--contrast);
+    margin: 0;
+    transition: color 0.2s ease;
+  }
+
+  .user-details {
+
+    span {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    .profile-picture {
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: 100%;
+      border: 0.2rem solid var(--contrast);
+      background: var(--theme-dark);
+      margin: 0;
+    }
+  }
+
+
+  /* Middle nav (like Home, Explore, etc.) */
+  .middle-nav a {
+    margin: 0 1rem; 
+    text-decoration: none;
+    color: var(--contrast);
+    font-weight: 500;
+    font-size: 1.8rem; 
+    transition: color 0.2s ease;
+  }
+
+  .middle-nav a:hover, h1 a:hover {
+    color: var(--bright);
+  }
+
+  /* User profile area (e.g. login, profile icon) */
+  .user-profile a {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: var(--contrast);
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+  }
+
+  .user-profile a:hover {
+    color: var(--bright);
+  }
+
+}

@@ -1,0 +1,50 @@
+.restaurant-list-container {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--theme-dark);
+  border-radius: 0.6rem;
+  overflow: hidden;
+  box-shadow: 0 0.2rem 0.6rem var(--shadow);
+  font-size: 1.4rem;
+  max-width: 100rem;
+
+  th,
+  td {
+    padding: 0.8rem 1rem;
+    text-align: left;
+    color: var(--contrast)
+  }
+  
+  th {
+    background-color: var(--theme);
+    color: var(--contrast);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+  }
+  
+  .restaurant-item:nth-child(even) {
+    background-color: var(--theme);
+  }
+  
+  .restaurant-item:nth-child(odd) {
+    background-color: var(--theme-dark);
+  }
+  
+  .restaurant-item:hover {
+    background-color: var(--theme-light);
+    color: var(--theme-dark);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .restaurant-name {
+    color: var(--contrast);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .restaurant-name:hover {
+    text-decoration: underline;
+  }
+}

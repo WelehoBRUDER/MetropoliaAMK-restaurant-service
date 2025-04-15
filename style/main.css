@@ -10,7 +10,13 @@ body {
   padding: 0;
 }
 
+.dark-bg {
+  background: var(--theme-dark);
+}
+
 .dark-text {
+  color: var(--theme);
+
   *:not(button) {
     color: var(--theme);
     font-size: 1.6rem;
@@ -25,7 +31,9 @@ body {
   }
 }
 
-.white-text {h
+.white-text {
+  color: var(--contrast);
+
   *:not(button) {
     color: var(--contrast);
     font-size: 1.6rem;
@@ -40,75 +48,6 @@ body {
   }
 }
 
-header#header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--theme);
-  color: var(--contrast);
-  padding: 0.5rem 2rem; 
-  box-shadow: 0 0.4rem 0.6rem var(--shadow); /* 4px x 6px shadow */
-  position: sticky;
-  top: 0;
-  z-index: 10000;
-
-  /* Logo and title */
-  .logo-title h1 a {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--contrast);
-    margin: 0;
-    transition: color 0.2s ease;
-  }
-
-  .user-details {
-
-    span {
-      margin: 0;
-      font-size: 1.6rem;
-    }
-
-    .profile-picture {
-      width: 5.5rem;
-      height: 5.5rem;
-      border-radius: 100%;
-      border: 0.2rem solid var(--contrast);
-      background: var(--theme-dark);
-      margin: 0;
-    }
-  }
-
-
-  /* Middle nav (like Home, Explore, etc.) */
-  .middle-nav a {
-    margin: 0 1rem; 
-    text-decoration: none;
-    color: var(--contrast);
-    font-weight: 500;
-    font-size: 1.8rem; 
-    transition: color 0.2s ease;
-  }
-
-  .middle-nav a:hover, h1 a:hover {
-    color: var(--bright);
-  }
-
-  /* User profile area (e.g. login, profile icon) */
-  .user-profile a {
-    margin-left: 1rem;
-    text-decoration: none;
-    color: var(--contrast);
-    font-size: 1.8rem;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s ease;
-  }
-
-  .user-profile a:hover {
-    color: var(--bright);
-  }
-
-}
 
 main#service-body {
   display: flex;
@@ -167,16 +106,22 @@ button, .button {
   &.no-bg {
     background: none;
     border-radius: 0;
-    color: var(--theme);
     border: none;
     border-left: 0.2rem solid rgba(0, 0, 0, 0);
     border-right: 0.2rem solid  rgba(0, 0, 0, 0);
+
+    &:not(.white-text) {
+      color: var(--theme);
+    }
   }
 
   &.no-bg:hover {
-    color: var(--shadow);
     border-left: 0.2rem solid var(--theme);
     border-right: 0.2rem solid var(--theme);
+
+    &:not(.white-text) {
+      color: var(--shadow);
+    }
   }
 
   &:hover:not(.no-bg, .day-button) {
@@ -202,6 +147,7 @@ form {
   width: 100%;
   height: 60rem;
   max-width: 100rem;
+  margin: 0;
   margin-top: 6rem;
 }
 
@@ -276,137 +222,15 @@ form {
   flex-direction: row;
   align-items: center;
   gap: 2rem;
+
+  &.center {
+    justify-content: center;
+  }
 }
 
-
-.map-top-bar {
+.map-width {
   width: 100%;
-  position: absolute;
-  justify-content: center;
-  top: 0.2rem;
-  margin: 0;
-  background-color: var(--theme-dark);
-  z-index: 1000;
   max-width: 100rem;
-  border-radius: 2rem 2rem 0 0;
-}
-
-.restaurant-marker {
-  border-radius: 100%;
-  filter: drop-shadow(0 0.2rem 0.4rem var(--shadow));
-}
-
-.navigator {
-  border-radius: 100%;
-  padding: 0.3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    margin: 0;
-    padding: 0;
-  }
-}
-
-.company-filter {
-  display: flex;
-  gap: 1rem; /* 10px spacing between each checkbox group */
-  align-items: center;
-  background: var(--theme);
-  padding: 0.8rem 1.2rem; /* 8px top/bottom, 12px left/right */
-  border-radius: 0.6rem; /* 6px rounded corners */
-  box-shadow: 0 0.2rem 0.5rem var(--shadow); /* subtle shadow */
-}
-
-.company-filter input[type="checkbox"] {
-  accent-color: var(--bright); /* Modern checkbox coloring */
-  width: 1.2rem;
-  height: 1.2rem;
-  cursor: pointer;
-}
-
-.company-filter label {
-  color: var(--contrast);
-  font-size: 1.6rem;
-  cursor: pointer;
-  margin-left: 0.4rem;
-  user-select: none;
-  transition: color 0.2s ease;
-}
-
-.company-filter label:hover {
-  color: var(--bright);
-}
-
-.city-filter {
-  background-color: var(--theme);
-  color: var(--contrast);
-  border: none;
-  padding: 0.6rem 1rem; /* 6px top/bottom, 10px left/right */
-  border-radius: 0.6rem;
-  font-size: 1.6rem;
-  box-shadow: 0 0.2rem 0.4rem var(--shadow);
-  cursor: pointer;
-  appearance: none; /* hide native dropdown arrow */
-  background-image: url("data:image/svg+xml,%3Csvg fill='%23FAE1DF' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  background-size: 1.2rem;
-  min-width: 12rem;
-}
-
-.city-filter:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.2rem var(--bright);
-}
-
-.restaurant-list-container {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: var(--theme-dark);
-  border-radius: 0.6rem;
-  overflow: hidden;
-  box-shadow: 0 0.2rem 0.6rem var(--shadow);
-  font-size: 1.4rem;
-  max-width: 100rem;
-
-  th,
-  td {
-    padding: 0.8rem 1rem;
-    text-align: left;
-    color: var(--contrast)
-  }
-  
-  th {
-    background-color: var(--theme);
-    color: var(--contrast);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-  }
-  
-  .restaurant-item:nth-child(even) {
-    background-color: var(--theme);
-  }
-  
-  .restaurant-item:nth-child(odd) {
-    background-color: var(--theme-dark);
-  }
-  
-  .restaurant-item:hover {
-    background-color: var(--theme-light);
-    color: var(--theme-dark);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .restaurant-name {
-    color: var(--contrast);
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .restaurant-name:hover {
-    text-decoration: underline;
-  }
+  margin: 0 auto;
+  margin-top: -2rem;
 }
