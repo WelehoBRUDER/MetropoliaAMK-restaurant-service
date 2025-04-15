@@ -4,7 +4,7 @@ const createRestaurantsTable = (table, restaurants, callback) => {
       <th>Name</th>
       <th>Company</th>
       <th>City</th>
-    <th>
+    </tr>
   `;
   restaurants.forEach((restaurant) => {
     const restaurantElement = createRestaurant(restaurant, callback);

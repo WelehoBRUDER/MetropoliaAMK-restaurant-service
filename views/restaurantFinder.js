@@ -72,6 +72,7 @@ const selectRestaurant = async (restaurant, marker) => {
     marker._icon.classList.add("restaurant-marker");
     prevMarker = marker;
   }
+  window.scrollTo(0, 0);
   zoomTo(restaurant);
 };
 
