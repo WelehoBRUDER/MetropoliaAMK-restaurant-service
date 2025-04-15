@@ -26,7 +26,6 @@ const loadSession = async () => {
   const sessionStr = sessionStorage.getItem("student-restaurant-session");
   if (sessionStr) {
     session.current = JSON.parse(sessionStr);
-    const token = localStorage.getItem("service-token");
   } else {
     session.current = defaultSession;
   }
@@ -37,4 +36,11 @@ const clearSession = () => {
   sessionStorage.removeItem("student-restaurant-session");
 };
 
-export {updateSession, loadSession, clearSession, session};
+const getRestaurantById = (id) => {
+  const restaurant = session.current.restaurants.find(
+    (restaurant) => restaurant._id === id
+  );
+  return restaurant;
+};
+
+export {updateSession, loadSession, clearSession, session, getRestaurantById};

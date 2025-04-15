@@ -22,18 +22,18 @@
   <header id="header" class="white-text"></header>
   <main id="service-body">
     <div class="title dark-text">
-      <h1>[RESTAURANT NAME]</h1>
+      <h1 id="restaurant-name">[RESTAURANT NAME]</h1>
     </div>
     <div class="service-list">
-      <nav>
-        <button class="selected">Mon</button>
-        <button>Tue</button>
-        <button>Wed</button>
-        <button>Thu</button>
-        <button>Fri</button>
-        <button>Sat</button>
-        <button>Sun</button>
-        <button>Whole week</button>
+      <nav class="day-selector">
+        <button class="selected" data-value="mon">Mon</button>
+        <button data-value="tue">Tue</button>
+        <button data-value="wed">Wed</button>
+        <button data-value="thu">Thu</button>
+        <button data-value="fri">Fri</button>
+        <button data-value="sat">Sat</button>
+        <button data-value="sun">Sun</button>
+        <button data-value="all">Whole week</button>
       </nav>
       <div class="current-meals dark-text">
         <div class="meal-display">

@@ -44,6 +44,7 @@ const fetchImageData = async (url, options) => {
 const getAllRestaurants = async () => {
   const data = await fetchData(`${baseUrl}/restaurants`);
   if (data) {
+    console.log(data);
     return data;
   } else {
     return [];

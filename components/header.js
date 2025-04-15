@@ -1,4 +1,5 @@
 import {getUserData} from "../script/userData.js";
+import {main} from "../script/main.js";
 
 const createHeader = async () => {
   const header = document.querySelector("#header");
@@ -29,5 +30,7 @@ const createHeader = async () => {
     </nav>`;
   }
 };
+
+main();
 
 export default createHeader;
