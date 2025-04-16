@@ -1,7 +1,7 @@
 const lang = {
   _id: "en",
   _local: "en-EN",
-  _name: "English",
+  _name: "🇬🇧 English",
   search: "Search",
   show_on_map: "Show on map",
   go_to_details: "Go to details →",
@@ -31,6 +31,7 @@ const lang = {
   city: "City",
   favorite_restaurants: "Favorite restaurants",
   profile_picture: "Profile picture",
+  invalid_file_type: "Invalid filetype. Please select a JPEG or PNG file.",
 };
 
 export default lang;

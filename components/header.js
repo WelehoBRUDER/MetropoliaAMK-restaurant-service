@@ -1,6 +1,7 @@
 import {getUserData} from "../script/userData.js";
 import {getProfilePicture} from "../routes/routes.js";
 import {main} from "../script/main.js";
+import {languages, setLanguage} from "../lang/lang.js";
 import startTranslatingDocument from "../lang/translateDocument.js";
 
 const createHeader = async () => {
@@ -40,6 +41,21 @@ const createHeader = async () => {
       </nav>
     `;
   }
+  const languageSelector = document.createElement("select");
+  languageSelector.classList.add("default-select");
+  languageSelector.classList.add("dark");
+  Object.entries(languages).forEach(([key, lang]) => {
+    const option = document.createElement("option");
+    option.value = key;
+    option.innerText = lang._name;
+    languageSelector.append(option);
+  });
+  languageSelector.value = localStorage.getItem("lang") || "fi";
+  languageSelector.addEventListener("change", (e) => {
+    const selectedLanguage = e.target.value;
+    setLanguage(selectedLanguage);
+  });
+  userProfile.append(languageSelector);
   startTranslatingDocument();
 };
 

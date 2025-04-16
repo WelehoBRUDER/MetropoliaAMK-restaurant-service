@@ -1,7 +1,4 @@
-import english from "./english.js";
-import finnish from "./finnish.js";
-
-const language = localStorage.getItem("lang") || "fi";
+import {getLanguage} from "./lang.js";
 
 const translateDocument = (root = document.body) => {
   const walker = document.createTreeWalker(
@@ -29,24 +26,14 @@ const translateDocument = (root = document.body) => {
   let keys = "";
   while ((node = walker.nextNode())) {
     node.textContent = node.textContent.replace(regex, (match, key) => {
-      if (!finnish[key] && !english[key]) {
+      if (!getLanguage()[key]) {
         keys += key + ":'',\n";
       }
       return translateText(key);
     });
   }
-  console.log("Missing keys:\n", keys);
-};
-
-const getLanguage = () => {
-  switch (language) {
-    case "en":
-      return english;
-    case "fi":
-      return finnish;
-    default:
-      return english;
-  }
+  /* DEBUG LINE */
+  //console.log("Missing keys:\n", keys);
 };
 
 const translateText = (text) => {
@@ -67,7 +54,6 @@ const startTranslatingDocument = () => {
     for (const mutation of mutations) {
       console.log(mutation);
       if (mutation.type === "characterData") {
-        console.log("MUTATED", mutation.target);
         translateDocument(mutation.target.parentNode);
       }
       if (mutation.type === "childList") {
@@ -77,7 +63,6 @@ const startTranslatingDocument = () => {
             translateDocument(node.parentNode);
           } else if (node.nodeType === 1) {
             // element
-            console.log("ADDED", node);
             translateDocument(node);
           }
         });

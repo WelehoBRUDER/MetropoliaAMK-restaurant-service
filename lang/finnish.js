@@ -1,7 +1,7 @@
 const lang = {
   _id: "fi",
   _local: "fi-FI",
-  _name: "Suomi",
+  _name: "🇫🇮 Suomi",
   search: "Hae",
   show_on_map: "Näytä kartalla",
   go_to_details: "Näytä ruokalista →",
