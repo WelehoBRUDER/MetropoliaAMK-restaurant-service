@@ -52,7 +52,6 @@ const startTranslatingDocument = () => {
   // Watch for future DOM changes (for dynamic content)
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      console.log(mutation);
       if (mutation.type === "characterData") {
         translateDocument(mutation.target.parentNode);
       }

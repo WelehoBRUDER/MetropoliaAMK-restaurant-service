@@ -38,22 +38,8 @@ header#header {
   }
 
 
-  /* Middle nav (like Home, Explore, etc.) */
-  .middle-nav a {
-    margin: 0 1rem; 
-    text-decoration: none;
-    color: var(--contrast);
-    font-weight: 500;
-    font-size: 1.8rem; 
-    transition: color 0.2s ease;
-  }
-
-  .middle-nav a:hover, h1 a:hover {
-    color: var(--bright);
-  }
-
   /* User profile area (e.g. login, profile icon) */
-  .user-profile a {
+  nav a {
     margin-left: 1rem;
     text-decoration: none;
     color: var(--contrast);
@@ -63,7 +49,7 @@ header#header {
     transition: color 0.2s ease;
   }
 
-  .user-profile a:hover {
+  nav a:hover {
     color: var(--bright);
   }
 

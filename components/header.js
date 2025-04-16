@@ -8,10 +8,8 @@ const createHeader = async () => {
   const header = document.querySelector("#header");
   header.classList.add("white-text");
   header.innerHTML = `
-      <div class="logo-title">
+      <div class="logo-title flex-row">
       <h1><a href="index.html">{website_title}</a></h1>
-    </div>
-    <div class="middle-nav">
       <nav class="restaurants">
         <a href="restaurants.html">{all_restaurants}</a>
       </nav>

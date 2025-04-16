@@ -31,7 +31,7 @@ const restaurantList = document.querySelector(".restaurant-list-container");
 const cityFilterTool = document.querySelector(".city-filter");
 let prevMarker = null;
 let includeCompanies = [];
-let city = "All";
+let city = "{all}";
 
 const updateInfo = () => {
   if (session.current.selected.length <= 1) {
@@ -201,7 +201,9 @@ const updateFavoriteStar = async () => {
 
 const addToFavorites = async () => {
   const user = await getUserData();
-  if (!user) return;
+  if (!user) {
+    window.location.href = "/login.html";
+  }
   const response = await postAddFavorite(user, session.current.selected);
   if (response.status === "success") {
     await getUserData({forceReload: true});

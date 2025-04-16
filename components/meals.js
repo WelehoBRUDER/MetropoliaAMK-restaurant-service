@@ -19,7 +19,6 @@ const createMealRow = (meal) => {
 
 const createMealDisplay = (meals) => {
   currentMeals.innerHTML = "";
-  console.log(meals);
   meals?.courses.forEach((meal) => {
     currentMeals.appendChild(createMealRow(meal));
   });

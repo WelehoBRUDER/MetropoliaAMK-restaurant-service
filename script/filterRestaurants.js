@@ -22,7 +22,7 @@ const getCities = () => {
   [...session.current.restaurants].forEach((restaurant) => {
     cities.add(restaurant.city);
   });
-  cities.add("All");
+  cities.add("{all}");
   return [...cities].sort((a, b) => a.localeCompare(b));
 };
 
@@ -31,7 +31,6 @@ const filterRestaurants = (options) => {
   restaurants = [...session.current.restaurants];
   if (options?.company) {
     const {include, exclude} = options.company;
-    console.log(include, exclude);
     filterByCompany(include, exclude);
   }
   if (options?.city) {
@@ -71,7 +70,7 @@ const filterByCompany = (include, exclude) => {
 };
 
 const filterByCity = (city) => {
-  if (city === "All") return;
+  if (city === "{all}") return;
   restaurants = restaurants.filter((restaurant) => {
     return restaurant.city.toLowerCase() === city.toLowerCase();
   });
@@ -84,7 +83,6 @@ const getRestaurants = () => {
 const getFavorites = async () => {
   const userData = await getUserData();
   if (!userData) return [];
-  console.log(restaurants);
   return restaurants.filter((restaurant) => {
     return userData.favorite_restaurants.includes(restaurant._id);
   });

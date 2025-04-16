@@ -12,6 +12,7 @@ const starButton = document.querySelector(".star");
 const restaurantId = new URLSearchParams(window.location.search).get("id");
 const restaurant = getRestaurantById(restaurantId);
 const restaurantName = document.querySelector("#restaurant-name");
+const restaurantAddress = document.querySelector("#restaurant-address");
 const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 let dailyMeal = null;
 let meals = [];
@@ -20,6 +21,7 @@ let currentWeekDay = days[new Date().getDay() - 1]; // Monday is 0, Sunday is 6
 
 const updateRestaurantName = () => {
   restaurantName.innerText = `${restaurant.company} | ${restaurant.name}`;
+  restaurantAddress.innerText = restaurant.address ?? "{no_address}";
   document.title = `${restaurant.name} Meals | SRS`;
 };
 

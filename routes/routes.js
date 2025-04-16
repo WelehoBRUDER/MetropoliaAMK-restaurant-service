@@ -196,6 +196,9 @@ const getProfilePicture = async (id) => {
 };
 
 const postProfilePicture = async (user, picture) => {
+  if (!user.token) {
+    window.location.href = "/login.html";
+  }
   const formData = new FormData();
   formData.append("file", picture);
   const response = await fetchData(
@@ -212,6 +215,9 @@ const postProfilePicture = async (user, picture) => {
 };
 
 const putUser = async (user, userData) => {
+  if (!user.token) {
+    window.location.href = "/login.html";
+  }
   const response = await fetchData(`${backendUrl}users/edit/${user.username}`, {
     method: "PUT",
     headers: {
@@ -224,6 +230,9 @@ const putUser = async (user, userData) => {
 };
 
 const postAddFavorite = async (user, restaurantId) => {
+  if (!user.token) {
+    window.location.href = "/login.html";
+  }
   const response = await fetchData(
     `${backendUrl}users/favorite/${restaurantId}`,
     {
@@ -238,6 +247,9 @@ const postAddFavorite = async (user, restaurantId) => {
 };
 
 const postRemoveFavorite = async (user, restaurantId) => {
+  if (!user.token) {
+    window.location.href = "/login.html";
+  }
   const response = await fetchData(
     `${backendUrl}users/remove-favorite/${restaurantId}`,
     {
