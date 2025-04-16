@@ -15,6 +15,7 @@ const restaurantName = document.querySelector("#restaurant-name");
 const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 let dailyMeal = null;
 let meals = [];
+const today = days[new Date().getDay() - 1];
 let currentWeekDay = days[new Date().getDay() - 1]; // Monday is 0, Sunday is 6
 
 const updateRestaurantName = () => {
@@ -54,7 +55,7 @@ const initDaySelector = () => {
     const dayButton = document.createElement("button");
     dayButton.classList.add("day-button");
     dayButton.textContent = capitalize(day) + " " + getDateOfWeekday(day);
-    if (currentWeekDay === day) {
+    if (today === day) {
       dayButton.classList.add("selected");
       dayButton.textContent = "Today";
     } else if (meals.length === 0) {
@@ -90,9 +91,9 @@ const getAllMeals = async () => {
 };
 
 const getMealForDay = async (day) => {
-  if (day === currentWeekDay) {
+  if (day === today) {
     if (dailyMeal?.courses?.length > 0) {
-      return dailyMeal.courses;
+      return dailyMeal;
     } else return null;
   }
   const index = days.indexOf(day);
