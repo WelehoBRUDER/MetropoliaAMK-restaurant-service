@@ -1,7 +1,7 @@
 import createHeader from "../components/header.js";
 import {getRestaurantById} from "../script/session.js";
 import {createMealDisplay} from "../components/meals.js";
-import {getWeeklyMeals} from "../routes/routes.js";
+import {getWeeklyMeals, getDailyMeals} from "../routes/routes.js";
 import {getDateOfWeekday} from "../lib/dates.js";
 import {isFavorite} from "../script/filterRestaurants.js";
 import {postAddFavorite, postRemoveFavorite} from "../routes/routes.js";
@@ -13,6 +13,7 @@ const restaurantId = new URLSearchParams(window.location.search).get("id");
 const restaurant = getRestaurantById(restaurantId);
 const restaurantName = document.querySelector("#restaurant-name");
 const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+let dailyMeal = null;
 let meals = [];
 let currentWeekDay = days[new Date().getDay() - 1]; // Monday is 0, Sunday is 6
 
@@ -56,6 +57,9 @@ const initDaySelector = () => {
     if (currentWeekDay === day) {
       dayButton.classList.add("selected");
       dayButton.textContent = "Today";
+    } else if (meals.length === 0) {
+      dayButton.classList.add("disabled");
+      dayButton.disabled = true;
     }
     dayButton.addEventListener("click", (e) => {
       currentWeekDay = day;
@@ -80,10 +84,17 @@ const displayDailyMeals = async (day) => {
 
 const getAllMeals = async () => {
   meals = await getWeeklyMeals(restaurantId);
-  displayDailyMeals(currentWeekDay);
+  if (meals?.status === "fail") {
+    meals = [];
+  }
 };
 
 const getMealForDay = async (day) => {
+  if (day === currentWeekDay) {
+    if (dailyMeal?.courses?.length > 0) {
+      return dailyMeal.courses;
+    } else return null;
+  }
   const index = days.indexOf(day);
   if (meals?.days?.[index]) {
     return meals.days[index];
@@ -92,7 +103,17 @@ const getMealForDay = async (day) => {
   }
 };
 
-updateRestaurantName();
-getAllMeals();
-initDaySelector();
-updateStar();
+const getDailyMeal = async () => {
+  dailyMeal = await getDailyMeals(restaurantId);
+  displayDailyMeals(currentWeekDay);
+};
+
+const init = async () => {
+  updateRestaurantName();
+  await getDailyMeal();
+  await getAllMeals();
+  initDaySelector();
+  updateStar();
+};
+
+init();

@@ -180,7 +180,11 @@ showOnMapButton.addEventListener("click", () => {
 });
 
 const updateFavoriteStar = async () => {
-  if (!session.current.selected) return;
+  if (!session.current.selected) {
+    addToFavoritesButton.style.display = "none";
+    return;
+  }
+  addToFavoritesButton.style.display = "block";
   const icon = addToFavoritesButton.querySelector("img");
   const isFav = await isFavorite(session.current.selected);
   if (isFav) {

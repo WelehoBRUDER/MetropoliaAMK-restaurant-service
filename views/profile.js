@@ -13,7 +13,7 @@ const createUserProfile = async () => {
   const userData = await getUserData();
   const ownProfile = username === userData?.username;
   const user = ownProfile ? userData : await getUserByName(username);
-  if (!user) {
+  if (!user?._id) {
     // Navigate to 404
     window.location.href = "/404.html";
   }
