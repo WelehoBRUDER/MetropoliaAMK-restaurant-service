@@ -23,7 +23,7 @@ const lang = {
   display_name: "Julkinen käyttäjänimi",
   password: "Salasana",
   confirm_password: "Vahvista salasana",
-  email: "Sähköposti osoite",
+  email: "Sähköpostiosoite",
   created_on: "Liittymispäivä",
   edit_profile: "Muokkaa profiilia",
   save_changes: "Tallenna muutokset",

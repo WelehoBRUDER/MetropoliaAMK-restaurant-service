@@ -1,4 +1,5 @@
 import {baseUrl, backendUrl} from "./variables.js";
+import {getLanguage} from "../lang/lang.js";
 import {local} from "../script/local.js";
 
 const fetchData = async (url, options) => {
@@ -52,7 +53,7 @@ const getAllRestaurants = async () => {
 
 const getDailyMeals = async (restaurantId) => {
   const menu = await fetchData(
-    `${baseUrl}/restaurants/daily/${restaurantId}/${local.lang}`
+    `${baseUrl}/restaurants/daily/${restaurantId}/${getLanguage()._id}`
   );
   if (menu) {
     return menu;
@@ -63,7 +64,7 @@ const getDailyMeals = async (restaurantId) => {
 
 const getWeeklyMeals = async (restaurantId) => {
   const menu = await fetchData(
-    `${baseUrl}/restaurants/weekly/${restaurantId}/${local.lang}`
+    `${baseUrl}/restaurants/weekly/${restaurantId}/${getLanguage()._id}`
   );
   if (menu) {
     return menu;
