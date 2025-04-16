@@ -235,14 +235,18 @@ const updateCurrentMarker = async () => {
   }
 };
 
+const init = () => {
+  createCompanyFilter();
+  createCityFilter();
+  createRestaurantPopups(session.current.restaurants);
+  createRestaurantsTable(
+    restaurantList,
+    session.current.restaurants,
+    selectRestaurant
+  );
+  updateFavoriteStar();
+};
+
 createHeader();
 addSearch({callback: selectRestaurant});
-createCompanyFilter();
-createCityFilter();
-createRestaurantPopups(session.current.restaurants);
-createRestaurantsTable(
-  restaurantList,
-  session.current.restaurants,
-  selectRestaurant
-);
-updateFavoriteStar();
+init();

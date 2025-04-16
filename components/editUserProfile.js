@@ -9,12 +9,12 @@ const editUserProfile = (user) => {
         <p id="edit-error" class="error-message"></p>
         <label for="picture">Profile picture</label>
         <input type="file" class="normal-input" name="picture" id="picture" accept="image/*">
-        <label for="fullname">Display name</label>
+        <label for="fullname">{display_name}</label>
         <input type="text" value="${user.fullname}" class="normal-input" name="fullname" id="fullname">
-        <label for="email">Email</label>
+        <label for="email">{email}</label>
         <input type="email" value="${user.email}" class="normal-input" name="email" id="email">
-        <button type="submit">Save changes</button>
-        <button type="button" onclick="window.location.href = '/profile.html?id=${user.username}'">Cancel</button>
+        <button type="submit">{save_changes}</button>
+        <button type="button" onclick="window.location.href = '/profile.html?id=${user.username}'">{cancel}</button>
       </form>`;
 
   const editForm = document.querySelector("#edit-form");

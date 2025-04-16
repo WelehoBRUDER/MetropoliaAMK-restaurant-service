@@ -1,17 +1,18 @@
 import {getUserData} from "../script/userData.js";
 import {getProfilePicture} from "../routes/routes.js";
 import {main} from "../script/main.js";
+import startTranslatingDocument from "../lang/translateDocument.js";
 
 const createHeader = async () => {
   const header = document.querySelector("#header");
   header.classList.add("white-text");
   header.innerHTML = `
       <div class="logo-title">
-      <h1><a href="index.html">Student Restaurant Service</a></h1>
+      <h1><a href="index.html">{website_title}</a></h1>
     </div>
     <div class="middle-nav">
       <nav class="restaurants">
-        <a href="restaurants.html">All Restaurants</a>
+        <a href="restaurants.html">{all_restaurants}</a>
       </nav>
     </div>`;
 
@@ -21,9 +22,8 @@ const createHeader = async () => {
   header.append(userProfile);
   userProfile.innerHTML = `
     <nav class="user-nav">
-      <a href="login.html">Log in</a>
-      <span>|</span>
-      <a href="signup.html">Sign up</a>
+      <a href="login.html">{log_in}</a>
+      <a href="signup.html">{sign_up}</a>
     </nav>
   `;
   const user = await getUserData();
@@ -31,15 +31,16 @@ const createHeader = async () => {
     const picture = await getProfilePicture(user.profile_picture);
     userProfile.innerHTML = `
       <div class="user-details white-text flex-row">
-        <img src="${picture}" alt="Profile picture of ${user.fullname}" class="profile-picture">
+        <img src="${picture}" alt="{profile_picture_belonging_to} ${user.fullname}" class="profile-picture">
         <span class="username">${user.fullname}</span>
       </div>
       <nav class="user-nav">
-      <a href="profile.html?id=${user.username}">My profile</a>
-      <a href="logout.html">Log out</a>
+      <a href="profile.html?id=${user.username}">{my_profile}</a>
+      <a href="logout.html">{log_out}</a>
       </nav>
     `;
   }
+  startTranslatingDocument();
 };
 
 main();

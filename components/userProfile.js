@@ -9,14 +9,14 @@ const userProfile = async (user, options) => {
     <img src="${imgUrl}" alt="Profile picture of ${
     user.fullname
   }" class="profile-picture">
-    <p>Username: ${user.username}</p>
-    ${options?.detailed ? `<p>Email address: ${user.email}</p>` : ""}
-    <p>Created on: ${new Date(user.date_registered).toLocaleDateString(
+    <p>{username}: ${user.username}</p>
+    ${options?.detailed ? `<p>{email}: ${user.email}</p>` : ""}
+    <p>{created_on}: ${new Date(user.date_registered).toLocaleDateString(
       "fi-FI"
     )}</p>
     ${
       options?.editable
-        ? `<button id="edit-profile" onclick="window.location.href='${window.location.href}&edit=true'">Edit profile</button>`
+        ? `<button id="edit-profile" onclick="window.location.href='${window.location.href}&edit=true'">{edit_profile}</button>`
         : ""
     }
   `;
