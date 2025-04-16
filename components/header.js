@@ -27,8 +27,8 @@ const createHeader = async () => {
     </nav>
   `;
   const user = await getUserData();
-  const picture = await getProfilePicture(user?.profile_picture);
   if (user) {
+    const picture = await getProfilePicture(user.profile_picture);
     userProfile.innerHTML = `
       <div class="user-details white-text flex-row">
         <img src="${picture}" alt="Profile picture of ${user.fullname}" class="profile-picture">

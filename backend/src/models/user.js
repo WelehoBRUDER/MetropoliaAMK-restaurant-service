@@ -36,6 +36,9 @@ UserSchema.pre("save", async function (next) {
 UserSchema.pre("updateOne", async function (next) {
   const update = this.getUpdate();
   if (update.password) {
+    console.log("UPDATE", update);
+    console.log("UPDATE PASSWORD", update.password);
+    console.log("RESALTED PASSWORD");
     const salt = await bcrypt.genSalt();
     update.password = await bcrypt.hash(update.password, salt);
   }

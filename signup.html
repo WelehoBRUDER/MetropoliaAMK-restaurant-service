@@ -17,15 +17,18 @@
 <body>
   <header id="header" class="white-text"></header>
   <main id="service-body">
-    <section id="signup">
+    <section id="signup" class="dark-text">
       <h2>Sign up</h2>
-      <form action="signup.php" method="post">
+      <form id="signup-form" method="post">
+        <p id="login-error" class="error-message"></p>
+        <label for="username">Username</label>
+        <input type="username" name="username" id="iusername" required>
         <label for="email">Email</label>
         <input type="email" name="email" id="email" required>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
-        <label for="password-confirmation">Confirm password</label>
-        <input type="password" name="password-confirmation" id="password-confirmation" required>
+        <label for="confirm-password">Confirm password</label>
+        <input type="password" name="confirm_password" id="confirm-password" required>
         <button type="submit">Sign up</button>
       </form>
     </section>

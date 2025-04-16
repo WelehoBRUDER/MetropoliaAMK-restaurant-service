@@ -90,6 +90,23 @@ const postLogin = async (username, password) => {
   }
 };
 
+const postSignUp = async (username, email, password) => {
+  try {
+    const data = await fetchData(`${backendUrl}users/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({username, email, password}),
+    });
+    if (data) {
+      return data;
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
 const getMeByToken = async (token) => {
   const response = await fetchData(`${backendUrl}users/me`, {
     method: "GET",
@@ -106,6 +123,10 @@ const getMeByToken = async (token) => {
     }
   } catch (error) {
     console.warn("Error fetching user data: " + error.message);
+    // Delete the token if the user is not found
+    localStorage.removeItem("service-token");
+    // Redirect to the frontpage
+    window.location.href = "/";
     return null;
   }
 };
@@ -204,6 +225,7 @@ export {
   getUserByName,
   getProfilePicture,
   postLogin,
+  postSignUp,
   postProfilePicture,
   postAddFavorite,
   postRemoveFavorite,

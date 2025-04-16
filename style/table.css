@@ -12,7 +12,7 @@
   td {
     padding: 0.8rem 1rem;
     text-align: left;
-    color: var(--contrast)
+    color: var(--contrast) !important
   }
   
   th {

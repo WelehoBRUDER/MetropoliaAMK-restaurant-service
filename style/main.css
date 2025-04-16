@@ -14,14 +14,17 @@ body {
   background: var(--theme-dark);
 }
 
-.dark-text {
+.dark-text:not(.error-message) {
   color: var(--theme);
 
-  *:not(button) {
+  *:not(button, .error-message) {
     color: var(--theme);
-    font-size: 1.6rem;
   }
 
+  *:not(h1, h2) {
+    font-size: 1.6rem;
+  }
+  
   h1 {
     font-size: 3rem;
   }
@@ -31,10 +34,10 @@ body {
   }
 }
 
-.white-text {
+.white-text:not(.error-message) {
   color: var(--contrast);
 
-  *:not(button) {
+  *:not(button, .error-message) {
     color: var(--contrast);
     font-size: 1.6rem;
   }
@@ -157,6 +160,11 @@ form {
   text-align: center;
   margin: 0;
   padding: 0;
+
+  * {
+    color: var(--error);
+    font-size: 1.6rem;
+  }
 }
 
 .title {

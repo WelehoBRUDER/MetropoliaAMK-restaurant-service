@@ -1,5 +1,6 @@
 import sharp from "sharp";
 import multer from "multer";
+import fs from "fs";
 
 const createThumbnail = async (req, res, next) => {
   if (!req.file) {
@@ -17,6 +18,10 @@ const createThumbnail = async (req, res, next) => {
   if (resizedImaged) {
     console.log("Thumbnail created:", resizedImaged);
   }
+  // Delete original file
+  fs.unlink(req.file.path, (err) => {
+    if (err) console.error("Error deleting original image:", err);
+  });
   next();
 };
 

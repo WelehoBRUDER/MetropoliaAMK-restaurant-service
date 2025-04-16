@@ -17,7 +17,7 @@ const userRouter = express.Router();
 
 userRouter.get("/one/:username", findUserByName);
 
-userRouter.post("/create", createUser);
+userRouter.post("/signup", createUser);
 
 userRouter.post(
   "/picture/:username",

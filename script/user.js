@@ -1,8 +1,17 @@
-import {postLogin, getMeByToken} from "../routes/routes.js";
+import {postLogin, getMeByToken, postSignUp} from "../routes/routes.js";
 
 const login = async (username, password) => {
   try {
     const data = await postLogin(username, password);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+const signUp = async (username, email, password) => {
+  try {
+    const data = await postSignUp(username, email, password);
     return data;
   } catch (error) {
     return error.message;
@@ -24,4 +33,4 @@ const hasToken = () => {
   return false;
 };
 
-export {login, getMe, hasToken};
+export {login, signUp, getMe, hasToken};
