@@ -5,6 +5,7 @@ import {getWeeklyMeals, getDailyMeals} from "../routes/routes.js";
 import {getDateOfWeekday} from "../lib/dates.js";
 import {isFavorite} from "../script/filterRestaurants.js";
 import {postAddFavorite, postRemoveFavorite} from "../routes/routes.js";
+import {getPath} from "../lib/navigate.js";
 
 createHeader();
 
@@ -28,10 +29,10 @@ const updateRestaurantName = () => {
 const updateStar = async () => {
   const img = starButton.querySelector("img");
   if (await isFavorite(restaurantId)) {
-    img.src = "icons/star_64dp_EAC452_FILL0_wght400_GRAD0_opsz48.png";
+    img.src = `${getPath()}/icons/star_64dp_EAC452_FILL0_wght400_GRAD0_opsz48.png`;
     starButton.title = "Remove from favorites";
   } else {
-    img.src = "icons/star_64dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png";
+    img.src = `${getPath()}/icons/star_64dp_FFFFFF_FILL0_wght400_GRAD0_opsz48.png`;
     starButton.title = "Add to favorites";
   }
 };
@@ -81,7 +82,7 @@ const displayDailyMeals = async (day) => {
   } else {
     document.querySelector(
       ".current-meals"
-    ).innerHTML = `<p class="error-message">No meals available for ${day}</p>`;
+    ).innerHTML = `<p>{no_meals_available_today}</p>`;
   }
 };
 

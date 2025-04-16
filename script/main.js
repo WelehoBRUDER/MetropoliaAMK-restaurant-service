@@ -1,5 +1,6 @@
 import {getAllRestaurants, getDailyMeals} from "../routes/routes.js";
 import {session, loadSession, updateSession} from "./session.js";
+import {navigate} from "../lib/navigate.js";
 
 const addSearch = (options) => {
   const search = document.querySelector(".search input");
@@ -57,7 +58,7 @@ const addSearch = (options) => {
 
 const selectRestaurant = async (restaurant) => {
   updateSession("selected", restaurant._id);
-  window.location.href = `restaurant-view.html?id=${restaurant._id}`;
+  navigate(`restaurant-view.html?id=${restaurant._id}`);
 };
 
 const main = async () => {

@@ -20,6 +20,7 @@ import {createRestaurantsTable} from "../components/restaurantsTable.js";
 import {getGeoLocation} from "../lib/geo.js";
 import {postAddFavorite, postRemoveFavorite} from "../routes/routes.js";
 import {getUserData} from "../script/userData.js";
+import {navigate, getPath} from "../lib/navigate.js";
 
 const showOnMapButton = document.querySelector("#show-on-map");
 const addToFavoritesButton = document.querySelector("#add-to-favorites");
@@ -188,10 +189,10 @@ const updateFavoriteStar = async () => {
   const icon = addToFavoritesButton.querySelector("img");
   const isFav = await isFavorite(session.current.selected);
   if (isFav) {
-    icon.src = "../icons/star_rate_24dp_B89230_FILL0_wght400_GRAD0_opsz24.png";
+    icon.src = `${getPath()}/icons/star_rate_24dp_B89230_FILL0_wght400_GRAD0_opsz24.png`;
     addToFavoritesButton.title = "Remove from favorites";
   } else {
-    icon.src = "../icons/star_rate_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png";
+    icon.src = `${getPath()}/icons/star_rate_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png`;
     addToFavoritesButton.title = "Add to favorites";
   }
   if (session.current.selected) {
@@ -202,7 +203,7 @@ const updateFavoriteStar = async () => {
 const addToFavorites = async () => {
   const user = await getUserData();
   if (!user) {
-    window.location.href = "/login.html";
+    navigate("/login.html");
   }
   const response = await postAddFavorite(user, session.current.selected);
   if (response.status === "success") {

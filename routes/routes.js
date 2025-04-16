@@ -1,6 +1,6 @@
 import {baseUrl, backendUrl} from "./variables.js";
 import {getLanguage} from "../lang/lang.js";
-import {local} from "../script/local.js";
+import {navigate} from "../lib/navigate.js";
 
 const fetchData = async (url, options) => {
   try {
@@ -146,7 +146,7 @@ const getMeByToken = async (token) => {
     // Delete the token if the user is not found
     localStorage.removeItem("service-token");
     // Redirect to the frontpage
-    window.location.href = "/";
+    navigate("/");
     return null;
   }
 };
@@ -198,7 +198,7 @@ const getProfilePicture = async (id) => {
 
 const postProfilePicture = async (user, picture) => {
   if (!user.token) {
-    window.location.href = "/login.html";
+    navigate("/login.html");
   }
   const formData = new FormData();
   formData.append("file", picture);
@@ -217,7 +217,7 @@ const postProfilePicture = async (user, picture) => {
 
 const putUser = async (user, userData) => {
   if (!user.token) {
-    window.location.href = "/login.html";
+    navigate("/login.html");
   }
   const response = await fetchData(`${backendUrl}users/edit/${user.username}`, {
     method: "PUT",
@@ -232,7 +232,7 @@ const putUser = async (user, userData) => {
 
 const postAddFavorite = async (user, restaurantId) => {
   if (!user.token) {
-    window.location.href = "/login.html";
+    navigate("/login.html");
   }
   const response = await fetchData(
     `${backendUrl}users/favorite/${restaurantId}`,
@@ -249,7 +249,7 @@ const postAddFavorite = async (user, restaurantId) => {
 
 const postRemoveFavorite = async (user, restaurantId) => {
   if (!user.token) {
-    window.location.href = "/login.html";
+    navigate("/login.html");
   }
   const response = await fetchData(
     `${backendUrl}users/remove-favorite/${restaurantId}`,

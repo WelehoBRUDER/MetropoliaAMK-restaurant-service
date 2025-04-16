@@ -1,4 +1,5 @@
 import {login, hasToken} from "../script/user.js";
+import {navigate} from "../lib/navigate.js";
 import createHeader from "../components/header.js";
 
 const loginForm = document.querySelector("#login-form");
@@ -13,14 +14,14 @@ loginForm.addEventListener("submit", async (e) => {
     if (data.token) {
       localStorage.setItem("service-token", data.token);
     }
-    window.location.href = "/";
+    navigate("/");
   }
 });
 const loginError = document.querySelector("#login-error");
 
 // Boot the user out if they are already logged in
 if (hasToken()) {
-  window.location.href = "/";
+  navigate("/");
 }
 
 createHeader();

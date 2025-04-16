@@ -18,6 +18,7 @@ const lang = {
   sign_up: "Rekisteröidy",
   my_profile: "Oma profiili",
   no_meals_available: "Ruokalista ei ole saatavilla",
+  no_meals_available_today: "Ruokalista ei ole saatavilla tälle päivälle",
   no_favorites: "Ei suosikkiravintoloita",
   username: "Käyttäjänimi",
   display_name: "Julkinen käyttäjänimi",

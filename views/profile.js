@@ -4,6 +4,7 @@ import {userProfile} from "../components/userProfile.js";
 import {editUserProfile} from "../components/editUserProfile.js";
 import {getFavorites} from "../script/filterRestaurants.js";
 import {createRestaurantsTable} from "../components/restaurantsTable.js";
+import {navigate} from "../lib/navigate.js";
 import createHeader from "../components/header.js";
 
 const createUserProfile = async () => {
@@ -15,7 +16,7 @@ const createUserProfile = async () => {
   const user = ownProfile ? userData : await getUserByName(username);
   if (!user?._id) {
     // Navigate to 404
-    window.location.href = "/404.html";
+    navigate("/404.html");
   }
   if (edit) {
     editUserProfile(user, {detailed: ownProfile, editable: ownProfile});
@@ -33,7 +34,7 @@ const createUserProfile = async () => {
       const table = document.createElement("table");
       table.classList.add("restaurant-list-container");
       createRestaurantsTable(table, favorites, (restaurant) => {
-        window.location.href = `restaurant-view.html?id=${restaurant._id}`;
+        navigate(`restaurant-view.html?id=${restaurant._id}`);
       });
       favoritesContainer.append(table);
     }

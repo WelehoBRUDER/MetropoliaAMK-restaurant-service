@@ -1,4 +1,5 @@
 import {putUser, postProfilePicture} from "../routes/routes.js";
+import {navigate} from "../lib/navigate.js";
 
 const editUserProfile = (user) => {
   const section = document.querySelector("#profile");
@@ -41,7 +42,7 @@ const editUserProfile = (user) => {
       const _data = Object.fromEntries(data.entries());
       const response = await putUser(user, _data);
       if (response.user) {
-        window.location.href = `/profile.html?id=${user.username}`;
+        navigate(`/profile.html?id=${user.username}`);
       } else {
         document.querySelector("#edit-error").innerText = response.error;
       }
