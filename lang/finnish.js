@@ -35,6 +35,13 @@ const lang = {
   profile_picture: "Profiilikuva",
   invalid_file_type:
     "Virheellinen tiedostotyyppi. Valitse JPEG- tai PNG-tiedosto.",
+  log_out_success_title: "Olet kirjautunut ulos",
+  log_out_success_subtitle:
+    "Ulos kirjautuminen onnistui. Voit sulkea tämän ikkunan.",
+  not_found: "404 - Hakemaasi sivua ei löytynyt",
+  not_found_detailed:
+    "Anteeksi, mutta etsimääsi sivua ei löytynyt. Tarkista URL-osoite tai palaa takaisin etusivulle.",
+  home: "Etusivu",
 };
 
 export default lang;

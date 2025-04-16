@@ -34,6 +34,13 @@ const lang = {
   favorite_restaurants: "Favorite restaurants",
   profile_picture: "Profile picture",
   invalid_file_type: "Invalid filetype. Please select a JPEG or PNG file.",
+  log_out_success_title: "You have logged out",
+  log_out_success_subtitle:
+    "You have successfully logged out of your account. You can now close this window.",
+  not_found: "404 - Page not found",
+  not_found_detailed:
+    "Sorry, but the page you are looking for could not be found. Please check the URL or go back to the homepage.",
+  home: "Homepage",
 };
 
 export default lang;
