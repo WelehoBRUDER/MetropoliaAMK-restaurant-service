@@ -31,7 +31,7 @@ userRouter.put("/edit/:username", requireAuth, editUser);
 
 userRouter.post("/login", login);
 
-userRouter.get("/logout", logOut);
+userRouter.get("/logout", requireAuth, logOut);
 
 userRouter.get("/me", requireAuth, authorize);
 

@@ -1,4 +1,9 @@
-import {postLogin, getMeByToken, postSignUp} from "../routes/routes.js";
+import {
+  postLogin,
+  getMeByToken,
+  postSignUp,
+  getLogout,
+} from "../routes/routes.js";
 
 const login = async (username, password) => {
   try {
@@ -18,6 +23,13 @@ const signUp = async (username, email, password) => {
   }
 };
 
+const logout = () => {
+  const token = localStorage.getItem("service-token");
+  if (!token) return null;
+  getLogout();
+  localStorage.removeItem("service-token");
+};
+
 const getMe = async () => {
   const token = localStorage.getItem("service-token");
   if (!token) return null;
@@ -33,4 +45,4 @@ const hasToken = () => {
   return false;
 };
 
-export {login, signUp, getMe, hasToken};
+export {login, logout, signUp, getMe, hasToken};

@@ -8,6 +8,7 @@ const requireAuth = (req, res, next) => {
   }
   try {
     res.locals.user = jwt.verify(token, process.env.JWT_SECRET);
+    res.locals.user.token = token;
     next();
   } catch (err) {
     res.status(403).send({message: "Invalid token"});

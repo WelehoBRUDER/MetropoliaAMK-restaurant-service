@@ -106,6 +106,26 @@ const postSignUp = async (username, email, password) => {
   }
 };
 
+const getLogout = () => {
+  fetchData(`${backendUrl}users/logout`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("service-token")}`,
+    },
+  })
+    .then((response) => {
+      if (response.status === "success") {
+        localStorage.removeItem("service-token");
+      } else {
+        console.error("Failed to log out: " + response.error);
+      }
+    })
+    .catch((error) => {
+      console.error("Error logging out: " + error.message);
+    });
+};
+
 const getMeByToken = async (token) => {
   const response = await fetchData(`${backendUrl}users/me`, {
     method: "GET",
@@ -238,6 +258,7 @@ export {
   getMeByToken,
   getUserByName,
   getProfilePicture,
+  getLogout,
   postLogin,
   postSignUp,
   postProfilePicture,

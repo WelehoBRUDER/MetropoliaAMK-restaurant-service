@@ -61,7 +61,6 @@ const editUser = async (req, res) => {
       return res.status(404).send({message: "User not found"});
     }
 
-    console.log("EDIT USER", fullname, email);
     await user.updateOne({
       fullname: fullname ?? user.fullname,
       email: email ?? user.email,
@@ -73,7 +72,6 @@ const editUser = async (req, res) => {
 };
 
 const editUserPicture = async (req, res) => {
-  console.log("FILE", req.file);
   const {username} = req.params;
   const picture = req.file;
   try {
@@ -114,13 +112,15 @@ const login = async (req, res) => {
     });
     res.status(200).send({user: user._id, token: token});
   } catch (err) {
-    console.log("LOGIN ERROR", err);
     res.status(400).json({message: err.message});
   }
 };
 
-const logOut = async (req, res) => {
-  res.clearCookie("jwt");
+const logOut = (req, res) => {
+  res.clearCookie("jwt", res.locals.user.token, {
+    httpOnly: true,
+    maxAge: maxAge * 1000,
+  });
   res.status(200).send("Logged out");
 };
 
