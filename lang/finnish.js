@@ -1,7 +1,7 @@
 const lang = {
-  id: "fi",
-  local: "fi-FI",
-  name: "Suomi",
+  _id: "fi",
+  _local: "fi-FI",
+  _name: "Suomi",
   search: "Hae",
   show_on_map: "Näytä kartalla",
   go_to_details: "Näytä ruokalista →",
@@ -19,11 +19,20 @@ const lang = {
   no_meals_available: "Ruokalista ei ole saatavilla",
   username: "Käyttäjänimi",
   display_name: "Julkinen käyttäjänimi",
+  password: "Salasana",
+  confirm_password: "Vahvista salasana",
   email: "Sähköposti osoite",
   created_on: "Liittymispäivä",
   edit_profile: "Muokkaa profiilia",
   save_changes: "Tallenna muutokset",
   cancel: "Peruuta",
+  name: "Nimi",
+  company: "Yhtiö",
+  city: "Kaupunki",
+  favorite_restaurants: "Suosikkiravintolat",
+  profile_picture: "Profiilikuva",
+  invalid_file_type:
+    "Virheellinen tiedostotyyppi. Valitse JPEG- tai PNG-tiedosto.",
 };
 
 export default lang;

@@ -65,18 +65,31 @@ const startTranslatingDocument = () => {
   // Watch for future DOM changes (for dynamic content)
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      mutation.addedNodes.forEach((node) => {
-        if (node.nodeType === 1) {
-          // element
-          translateDocument(node);
-        }
-      });
+      console.log(mutation);
+      if (mutation.type === "characterData") {
+        console.log("MUTATED", mutation.target);
+        translateDocument(mutation.target.parentNode);
+      }
+      if (mutation.type === "childList") {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === 3) {
+            // New text node added
+            translateDocument(node.parentNode);
+          } else if (node.nodeType === 1) {
+            // element
+            console.log("ADDED", node);
+            translateDocument(node);
+          }
+        });
+      }
     }
   });
 
   observer.observe(document.body, {
     childList: true,
     subtree: true,
+    characterData: true,
+    characterDataOldValue: true, // optional, for debugging
   });
 };
 

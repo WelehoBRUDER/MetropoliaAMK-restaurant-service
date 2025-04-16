@@ -7,7 +7,7 @@ const editUserProfile = (user) => {
   section.innerHTML = `
       <form method="post" id="edit-form">
         <p id="edit-error" class="error-message"></p>
-        <label for="picture">Profile picture</label>
+        <label for="picture">{profile_picture}</label>
         <input type="file" class="normal-input" name="picture" id="picture" accept="image/*">
         <label for="fullname">{display_name}</label>
         <input type="text" value="${user.fullname}" class="normal-input" name="fullname" id="fullname">
@@ -23,6 +23,10 @@ const editUserProfile = (user) => {
     const data = new FormData(editForm);
     const picture = data.get("picture");
     if (picture.size > 0) {
+      if (picture.type !== "image/jpeg" && picture.type !== "image/png") {
+        document.querySelector("#edit-error").innerText = "{invalid_file_type}";
+        return;
+      }
       try {
         const updatedPicture = await postProfilePicture(user, picture);
         if (updatedPicture.user) {

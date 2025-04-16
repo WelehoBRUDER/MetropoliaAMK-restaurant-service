@@ -1,9 +1,9 @@
 const createRestaurantsTable = (table, restaurants, callback) => {
   table.innerHTML = `
     <tr>
-      <th>Name</th>
-      <th>Company</th>
-      <th>City</th>
+      <th>{name}</th>
+      <th>{company}</th>
+      <th>{city}</th>
     </tr>
   `;
   restaurants.forEach((restaurant) => {

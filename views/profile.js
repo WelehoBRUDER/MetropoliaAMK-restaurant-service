@@ -25,10 +25,11 @@ const createUserProfile = async () => {
   const favorites = await getFavorites();
   const favoritesContainer = document.querySelector(".favorites-container");
   if (favoritesContainer) {
+    favoritesContainer.classList.add("dark-text");
     if (favorites.length === 0) {
-      favoritesContainer.innerHTML = `<p>No favorites yet.</p>`;
+      favoritesContainer.innerHTML = `<p>{no_favorites}</p>`;
     } else {
-      favoritesContainer.innerHTML = `<h2>Favorite Restaurants</h2>`;
+      favoritesContainer.innerHTML = `<h2>{favorite_restaurants}</h2>`;
       const table = document.createElement("table");
       table.classList.add("restaurant-list-container");
       createRestaurantsTable(table, favorites, (restaurant) => {

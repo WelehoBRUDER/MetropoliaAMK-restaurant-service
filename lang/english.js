@@ -1,7 +1,7 @@
 const lang = {
-  id: "en",
-  local: "en-EN",
-  name: "English",
+  _id: "en",
+  _local: "en-EN",
+  _name: "English",
   search: "Search",
   show_on_map: "Show on map",
   go_to_details: "Go to details →",
@@ -19,11 +19,18 @@ const lang = {
   no_meals_available: "No meals available",
   username: "Username",
   display_name: "Public display name",
+  password: "Password",
+  confirm_password: "Confirm password",
   email: "Email address",
   created_on: "Created on",
   edit_profile: "Edit profile",
   save_changes: "Save changes",
   cancel: "Cancel",
+  name: "Name",
+  company: "Company",
+  city: "City",
+  favorite_restaurants: "Favorite restaurants",
+  profile_picture: "Profile picture",
 };
 
 export default lang;
