@@ -27,10 +27,9 @@ const fetchImageData = async (url, options) => {
       try {
         const data = await res.blob();
         const imageUrl = URL.createObjectURL(data);
-        console.log(imageUrl);
         return imageUrl;
       } catch (error) {
-        console.error("Failed to get response data: " + error.message);
+        console.log("Failed to get response data: " + error.message);
       }
     } else {
       const errorMessage = await res.json();
@@ -156,8 +155,23 @@ const getProfilePicture = async (id) => {
       "Content-Type": "application/json",
     },
   });
-  if (response) {
+  if (response.status !== "fail") {
     return response;
+  } else {
+    const defaultImage = await fetchImageData(
+      `${backendUrl}uploads/default.png`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (defaultImage.status !== "fail") {
+      return defaultImage;
+    } else {
+      return `${baseUrl}/uploads/default.png`;
+    }
   }
 };
 

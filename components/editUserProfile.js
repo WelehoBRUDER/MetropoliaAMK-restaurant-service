@@ -13,8 +13,6 @@ const editUserProfile = (user) => {
         <input type="text" value="${user.fullname}" class="normal-input" name="fullname" id="fullname">
         <label for="email">Email</label>
         <input type="email" value="${user.email}" class="normal-input" name="email" id="email">
-        <label for="password">New password (keep empty to not change)</label>
-        <input type="password" class="normal-input" name="password" id="password">
         <button type="submit">Save changes</button>
         <button type="button" onclick="window.location.href = '/profile.html?id=${user.username}'">Cancel</button>
       </form>`;
@@ -24,8 +22,7 @@ const editUserProfile = (user) => {
     e.preventDefault();
     const data = new FormData(editForm);
     const picture = data.get("picture");
-
-    if (picture) {
+    if (picture.size > 0) {
       try {
         const updatedPicture = await postProfilePicture(user, picture);
         if (updatedPicture.user) {
@@ -37,9 +34,10 @@ const editUserProfile = (user) => {
     }
 
     try {
-      const response = await putUser(user, data);
+      const _data = Object.fromEntries(data.entries());
+      const response = await putUser(user, _data);
       if (response.user) {
-        // window.location.href = `/profile.html?id=${user.username}`;
+        window.location.href = `/profile.html?id=${user.username}`;
       } else {
         document.querySelector("#edit-error").innerText = response.error;
       }

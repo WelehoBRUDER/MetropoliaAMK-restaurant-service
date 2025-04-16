@@ -61,6 +61,7 @@ const editUser = async (req, res) => {
       return res.status(404).send({message: "User not found"});
     }
 
+    console.log("EDIT USER", fullname, email);
     await user.updateOne({
       fullname: fullname ?? user.fullname,
       email: email ?? user.email,

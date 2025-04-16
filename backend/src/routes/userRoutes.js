@@ -27,13 +27,7 @@ userRouter.post(
   editUserPicture
 );
 
-userRouter.put(
-  "/edit/:username",
-  requireAuth,
-  upload.single("file"),
-  createThumbnail,
-  editUser
-);
+userRouter.put("/edit/:username", requireAuth, editUser);
 
 userRouter.post("/login", login);
 
