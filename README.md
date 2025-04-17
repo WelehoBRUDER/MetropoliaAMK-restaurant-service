@@ -2,6 +2,8 @@
  ## [Link to hosted site](https://users.metropolia.fi/~juhanaha/web-development/MetropoliaAMK-restaurant-service/index.html)
 
 ## Overview
+[![CodeFactor](https://www.codefactor.io/repository/github/welehobruder/metropoliaamk-restaurant-service/badge)](https://www.codefactor.io/repository/github/welehobruder/metropoliaamk-restaurant-service)
+
 This application is a simple student restaurant service where users can find their nearest restaurant or filter restaurants by their parent company and location. The application shows each restaurant's weekly menu and address. Other features include user authentication, profile management and favourites list, as well as geolocation for finding the nearest restaurant.
 
 ## List of features
