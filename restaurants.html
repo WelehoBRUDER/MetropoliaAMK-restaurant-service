@@ -27,7 +27,7 @@
     <div class="map-top-bar flex-row">
       <div class="search-wrapper flex-row center">
         <div class="input-container search forced">
-          <input type="text" placeholder="Search for a restaurant">
+          <input type="search" placeholder="Search for a restaurant">
           <button class="no-bg">{search}</button>
         </div>
         <div class="search-results on-map">
@@ -35,14 +35,14 @@
       </div>
       <div class="company-filter flex-row"></div>
       <select name="city-filter" class="city-filter default-select"></select>
-      <button class="navigator"><img src="icons/near_me_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png"
+      <button class="navigator"><img alt="find nearest" src="icons/near_me_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.png"
           title="Find nearest restaurant"></button>
     </div>
     <div id="map">
     </div>
     <div class="flex-row dark-bg white-text map-width center">
       <button class="no-bg white-text" id="show-on-map">{show_on_map}</button>
-      <button class="no-bg" title="Add to favorites" id="add-to-favorites"><img
+      <button class="no-bg" title="Add to favorites" id="add-to-favorites"><img alt="favorite icon"
           src="icons/star_rate_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png"></button>
       <h2 class="restaurant-name">{restaurant_not_selected}</h2>
       <a id="restaurant-details">

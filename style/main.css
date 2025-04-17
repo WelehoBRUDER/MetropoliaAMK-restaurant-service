@@ -80,7 +80,7 @@ main#service-body {
   box-shadow: 0 0.2rem 0.4rem var(--shadow);
 }
 
-input[type="text"]:not(.normal-input) {
+input[type="text"]:not(.normal-input), input[type="search"]:not(.normal-input) {
   font-size: 2rem;
   background: none;
   border: none;
