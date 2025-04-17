@@ -179,6 +179,10 @@ form {
   align-items: center;
 }
 
+.search-wrapper {
+  position: relative;
+}
+
 .search {
   position: relative;
   left: 0;
@@ -193,7 +197,7 @@ form {
   left: 1rem;
   top: 4.5rem;
   margin: 2rem;
-  z-index: 900;
+  z-index: 20;
   border: 0.2rem solid var(--contrast);
   box-shadow: 0 0.2rem 0.4rem var(--shadow);
   background: var(--theme);
@@ -203,7 +207,10 @@ form {
   overflow-y: auto;
 
   &.on-map {
-    left: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    top: 6.5rem;
   }
 
   li {

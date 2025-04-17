@@ -144,9 +144,11 @@ const getMeByToken = async (token) => {
   } catch (error) {
     console.warn("Error fetching user data: " + error.message);
     // Delete the token if the user is not found
-    localStorage.removeItem("service-token");
-    // Redirect to the frontpage
-    navigate("/");
+    if (error.message.trim() === "Invalid token") {
+      localStorage.removeItem("service-token");
+      // Redirect to the frontpage
+      navigate("/");
+    }
     return null;
   }
 };

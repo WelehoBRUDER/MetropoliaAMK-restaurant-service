@@ -17,6 +17,7 @@ const addSearch = (options) => {
         searchResults.innerHTML = "";
         return;
       }
+      if (session.current.restaurants.error) return [];
       // For now, just find the first restaurant where the name starts with or contains the search string
       const results = session.current.restaurants
         .filter((restaurant) => {

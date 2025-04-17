@@ -20,6 +20,12 @@ let meals = [];
 const today = days[new Date().getDay() - 1];
 let currentWeekDay = days[new Date().getDay() - 1]; // Monday is 0, Sunday is 6
 
+console.log(restaurant);
+if (!restaurant) {
+  // Navigate to 404
+  window.location.href = `${getPath()}/404.html`;
+}
+
 const updateRestaurantName = () => {
   restaurantName.innerText = `${restaurant.company} | ${restaurant.name}`;
   restaurantAddress.innerText = restaurant.address ?? "{no_address}";

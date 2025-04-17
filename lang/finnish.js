@@ -42,6 +42,7 @@ const lang = {
   not_found: "404 - Hakemaasi sivua ei löytynyt",
   not_found_detailed:
     "Anteeksi, mutta etsimääsi sivua ei löytynyt. Tarkista URL-osoite tai palaa takaisin etusivulle.",
+  not_available: "Ei saatavilla",
   home: "Etusivu",
 };
 

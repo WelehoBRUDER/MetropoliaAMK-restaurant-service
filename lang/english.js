@@ -41,6 +41,7 @@ const lang = {
   not_found: "404 - Page not found",
   not_found_detailed:
     "Sorry, but the page you are looking for could not be found. Please check the URL or go back to the homepage.",
+  not_available: "Not available",
   home: "Homepage",
 };
 

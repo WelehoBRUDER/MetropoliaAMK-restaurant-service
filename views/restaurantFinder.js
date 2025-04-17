@@ -70,6 +70,7 @@ updateInfo();
 
 const createRestaurantPopups = async (restaurants) => {
   clearMarkers();
+  if (restaurants.error) return;
   for (const restaurant of restaurants) {
     const location = restaurant.location.coordinates;
     let icon = await getRestaurantIcon(restaurant._id);

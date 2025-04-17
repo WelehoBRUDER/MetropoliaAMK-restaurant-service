@@ -6,11 +6,16 @@ let restaurants = [];
 
 const loadRestaurants = async () => {
   await loadSession();
+  if (session.current.restaurants.error) {
+    restaurants = {error: session.current.restaurants.error};
+    return;
+  }
   restaurants = [...session.current.restaurants];
 };
 
 const getCompanies = () => {
   const companies = new Set();
+  if (session.current.restaurants.error) return ["{not_available}"];
   [...session.current.restaurants].forEach((restaurant) => {
     companies.add(restaurant.company);
   });
@@ -19,6 +24,7 @@ const getCompanies = () => {
 
 const getCities = () => {
   const cities = new Set();
+  if (session.current.restaurants.error) return ["{all}"];
   [...session.current.restaurants].forEach((restaurant) => {
     cities.add(restaurant.city);
   });

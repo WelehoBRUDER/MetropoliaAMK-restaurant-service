@@ -1,11 +1,15 @@
 const createRestaurantsTable = (table, restaurants, callback) => {
   table.innerHTML = `
-    <tr>
-      <th>{name}</th>
-      <th>{company}</th>
-      <th>{city}</th>
-    </tr>
+  <tr>
+  <th>{name}</th>
+  <th>{company}</th>
+  <th>{city}</th>
+  </tr>
   `;
+  if (restaurants.error) {
+    table.innerHTML += `<tr><td colspan="3">{not_available}</td></tr>`;
+    return;
+  }
   restaurants.forEach((restaurant) => {
     const restaurantElement = createRestaurant(restaurant, callback);
     table.append(restaurantElement);

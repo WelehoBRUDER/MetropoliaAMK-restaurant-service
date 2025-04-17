@@ -1,4 +1,3 @@
-import {getMe} from "./user.js";
 const defaultSession = {
   restaurants: [],
   selected: "",
@@ -37,6 +36,7 @@ const clearSession = () => {
 };
 
 const getRestaurantById = (id) => {
+  if (session.current.restaurants.error) return null;
   const restaurant = session.current.restaurants.find(
     (restaurant) => restaurant._id === id
   );
