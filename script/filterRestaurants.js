@@ -88,7 +88,12 @@ const getRestaurants = () => {
   return restaurants;
 };
 
-const getFavorites = async () => {
+const getFavorites = async (options) => {
+  if (options.user) {
+    return restaurants.filter((restaurant) => {
+      return options.user.favorite_restaurants.includes(restaurant._id);
+    });
+  }
   const userData = await getUserData();
   if (!userData) return [];
   return restaurants.filter((restaurant) => {

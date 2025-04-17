@@ -23,7 +23,7 @@ const createUserProfile = async () => {
   } else {
     userProfile(user, {detailed: ownProfile, editable: ownProfile});
   }
-  const favorites = await getFavorites();
+  const favorites = await getFavorites({user});
   const favoritesContainer = document.querySelector(".favorites-container");
   if (favoritesContainer) {
     favoritesContainer.classList.add("dark-text");
