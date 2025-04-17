@@ -33,7 +33,7 @@ const getCities = () => {
 };
 
 const filterRestaurants = (options) => {
-  if (!restaurants) return;
+  if (!restaurants || restaurants.error) return;
   restaurants = [...session.current.restaurants];
   if (options?.company) {
     const {include, exclude} = options.company;
@@ -48,7 +48,9 @@ const getNearestRestaurant = (lat, lon) => {
   if (!restaurants) return null;
   let nearestRestaurant = null;
   let nearestDistance = Infinity;
-
+  if (restaurants.error) {
+    return {goHere: [lat, lon]};
+  }
   restaurants.forEach((restaurant) => {
     const restCords = [...restaurant.location.coordinates];
     const distance = calculateDistance(lat, lon, ...restCords.reverse());

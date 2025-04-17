@@ -35,7 +35,7 @@ let includeCompanies = [];
 let city = "{all}";
 
 const updateInfo = () => {
-  if (session.current.selected.length <= 1) {
+  if (!session.current.selected || session.current.selected.length <= 1) {
     detailsText.textContent = "No restaurant selected";
     detailsLink.querySelector("button").disabled = true;
   } else {
@@ -158,7 +158,9 @@ const filterAndRefresh = () => {
 };
 
 const zoomTo = (restaurant) => {
-  const cords = [...restaurant.location.coordinates].reverse();
+  const cords = !restaurant.goHere
+    ? [...restaurant.location.coordinates].reverse()
+    : restaurant.goHere;
   updatePosition(cords);
 };
 

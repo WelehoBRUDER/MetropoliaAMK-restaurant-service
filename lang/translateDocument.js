@@ -1,6 +1,7 @@
 import {getLanguage} from "./lang.js";
 
 const translateDocument = (root = document.body) => {
+  if (!root) return;
   const walker = document.createTreeWalker(
     root,
     NodeFilter.SHOW_TEXT,
