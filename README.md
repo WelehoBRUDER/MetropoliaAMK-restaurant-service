@@ -31,3 +31,9 @@ This application is a simple student restaurant service where users can find the
 ## Backend
 [Link to repository](https://github.com/WelehoBRUDER/MetropoliaAMK-restaurant-service-backend)  
 The backend repository is built for deployment only, and does not have any documentation.
+
+## GETTING THE BACKEND TO WORK
+  1. Connect to either Metropolia network or Metropolia VPN
+  2. Go to https://10.120.32.84/
+  3. Type "thisisunsafe" to accept cert
+  4. You should now be able to access the backend calls while on the users site
